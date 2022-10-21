@@ -8,12 +8,15 @@ module.exports = (sequelize, DataTypes) => {
       const { id, username, email } = this; // context will be the User instance
       return { id, username, email };
     }
+
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
+
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
+
     static async login({ credential, password }) {
       const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({
@@ -45,15 +48,18 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async signup({ username, email, password }) {
+    static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
-        hashedPassword
+        hashedPassword,
+        firstName,
+        lastName
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
+
     static associate(models) {
       // define association here
     }
@@ -87,6 +93,14 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60]
         }
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     },
     {
@@ -105,9 +119,8 @@ module.exports = (sequelize, DataTypes) => {
           attributes: {}
         },
 
-      },
+      }
     }
-
   );
   return User;
 };
