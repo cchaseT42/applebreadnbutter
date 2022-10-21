@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![airbnb-dbdiagram] (https://cdn.discordapp.com/attachments/762125768314454027/1033142315377766583/airbnb_dbdiagram.png)
+![airbnb-dbdiagram](https://cdn.discordapp.com/attachments/762125768314454027/1033142315377766583/airbnb_dbdiagram.png)
 
 ## API Documentation
 
