@@ -11,26 +11,24 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */await queryInterface.bulkInsert('Reviews'[
-      {
-        spotId: 1,
-        userId: 2,
-        review: "this place stinks.",
-        stars: 5
-      },
-      {
-        spotId: 2,
-        userId: 3,
-        review: "this place rules!",
-        stars: 1
-      },
-      {
-        spotId: 3,
-        userId: 2,
-        review: "this place was alright.",
-        stars: 3
-      }
-    ])
+    */
+   await queryInterface.bulkInsert('SpotImages', [
+    {
+      spotId: 1,
+      url: "imgurl1.com",
+      preview: true
+    },
+    {
+      spotId: 3,
+      url: "imgurl2.com",
+      preview: false
+    },
+    {
+      spotId: 2,
+      url: "imgurl3.com",
+      preview: true
+    }
+   ])
   },
 
   async down (queryInterface, Sequelize) {
@@ -40,6 +38,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-      await queryInterface.bulkDelete('Reviews')
+    await queryInterface.bulkDelete('SpotImages')
   }
 };
