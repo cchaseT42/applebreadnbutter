@@ -83,7 +83,7 @@ router.get('/:spotId', async (req, res) => { // <<<<<<< me while writing this ro
 
 let id = req.params.spotId
 let spot = await Spot.findByPk(id)
-
+console.log('get')
 if (!spot){
   const err = new Error('Search failed');
   err.message = "Spot couldn't be found.";
@@ -147,6 +147,35 @@ if(owner){
 
 
 res.json(jsonSpot)
+})
+
+router.delete('/:spotId', restoreUser, async (req, res) =>{
+  const { user } = req;
+  const id = user.id
+  console.log(id)
+
+  const spotDelete = await Spot.findByPk(req.params.spotId, {
+    where: {
+      ownerId: id
+    }
+  })
+
+  if (spotDelete) {
+    spotDelete.destroy()
+    res.statusCode = 200
+    res.json({
+      message: "Successfully deleted",
+      statusCode: res.statusCode
+    })
+  } else {
+    res.statusCode = 404
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  return
 })
 
 module.exports = router;
