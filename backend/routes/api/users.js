@@ -48,9 +48,28 @@ router.post(
 
     if (usedEmail){
       const err = new Error('Sign up failed');
-      err.title = 'Sign up failed';
-      err.errors = ['Email already in use.'];
-      res.status(403).send(err)
+      err.message = "User already exists";
+      res.statusCode = 403
+      return res.json({
+        message: err.message,
+        statusCode: 403,
+        errors: {
+          email: "User with that email already exists."
+        }
+      })
+    }
+
+    if (usedUsername){
+      const err = new Error('Sign up failed');
+      err.message = "User already exists";
+      res.statusCode = 403
+      return res.json({
+        message: err.message,
+        statusCode: 403,
+        errors: {
+          email: "User with that username already exists."
+        }
+      })
     }
 
     const user = await User.signup({ email, username, password, firstName, lastName });
