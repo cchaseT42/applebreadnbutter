@@ -1,5 +1,6 @@
 const express = require('express');
 const { json } = require('sequelize');
+const { restoreUser } = require('../../utils/auth');
 const { Spot, SpotImage, Review, Sequelize, User } = require('../../db/models');
 
 const router = express.Router();
@@ -35,6 +36,45 @@ router.get('/', async (req, res, next) => {
   res.json({'Spots': updatedSpots})
 })
 
+
+router.get('/current', restoreUser, async (req, res) => {
+  const { user } = req;
+  const id = user.id
+
+  const userSpots = await Spot.findAll({
+    where: {
+      ownerId: id
+    }
+  })
+
+  let updatedSpots = []
+  for (let i = 0; i < userSpots.length; i++){
+    let spot = userSpots[i].toJSON();
+    //console.log(spot)
+    const avgRating = await Review.findAll({
+      raw: true,
+      where: {spotId: spot.id},
+      attributes: [[Sequelize.fn('AVG', Sequelize.col('stars')), 'avgRating']]
+    })
+
+    const previewImage = await SpotImage.findAll({
+      raw: true,
+      where: { preview: true, spotId: spot.id},
+      attributes: ['url']
+    })
+    if (avgRating){
+      spot.avgRating = avgRating[0].avgRating
+    }
+    // console.log(previewImage[0].url)
+    if(previewImage.length){
+      spot.previewImage = previewImage[0].url
+    }
+
+    updatedSpots.push(spot)
+
+  }
+  res.json({'Spots': updatedSpots})
+})
 
 //
 router.get('/:spotId', async (req, res) => { // <<<<<<< me while writing this route https://www.youtube.com/watch?v=wkR6zN1h2TI
