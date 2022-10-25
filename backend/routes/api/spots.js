@@ -5,6 +5,7 @@ const { Spot, SpotImage, Review, Sequelize, User } = require('../../db/models');
 
 const router = express.Router();
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/', async (req, res, next) => {
   const spots = await Spot.findAll()
   let updatedSpots = []
@@ -36,7 +37,7 @@ router.get('/', async (req, res, next) => {
   res.json({'Spots': updatedSpots})
 })
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/current', restoreUser, async (req, res) => {
   const { user } = req;
   const id = user.id
@@ -76,7 +77,8 @@ router.get('/current', restoreUser, async (req, res) => {
   res.json({'Spots': updatedSpots})
 })
 
-//
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/:spotId', async (req, res) => { // <<<<<<< me while writing this route https://www.youtube.com/watch?v=wkR6zN1h2TI
 
 let id = req.params.spotId
