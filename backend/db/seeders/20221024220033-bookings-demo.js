@@ -30,7 +30,19 @@ module.exports = {
         userId: 1,
         startDate: '2022-03-03',
         endDate: '2022-03-06'
-      }
+      },
+      {
+        spotId: 5,
+        userId: 4,
+        startDate: '2022-07-03',
+        endDate: '2022-07-08'
+      },
+      {
+        spotId: 4,
+        userId: 5,
+        startDate: '2022-08-03',
+        endDate: '2022-08-09'
+      },
      ])
   },
 

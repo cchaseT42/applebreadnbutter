@@ -1,10 +1,11 @@
 const express = require('express');
 const { json } = require('sequelize');
-const { restoreUser } = require('../../utils/auth');
+const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, Sequelize, User } = require('../../db/models');
 
 const router = express.Router();
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/', async (req, res, next) => {
   const spots = await Spot.findAll()
   let updatedSpots = []
@@ -36,7 +37,7 @@ router.get('/', async (req, res, next) => {
   res.json({'Spots': updatedSpots})
 })
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/current', restoreUser, async (req, res) => {
   const { user } = req;
   const id = user.id
@@ -76,12 +77,54 @@ router.get('/current', restoreUser, async (req, res) => {
   res.json({'Spots': updatedSpots})
 })
 
-//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.put('/:spotId', requireAuth, async (req, res) =>{
+  const { user } = req;
+  const id = user.id
+  const { address, city, state, country, lat, lng, name, description, price} = req.body
+
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (!spot){
+    const err = new Error('Search failed');
+    err.message = "Spot couldn't be found.";
+    res.statusCode = '404';
+    return res.json({
+      message: err.message,
+      statusCode: 404
+    })
+}
+  if (spot.ownerId !== id){
+    const err = new Error('Search failed');
+    err.message = "You are not authorized to do that.";
+    res.statusCode = '403';
+    return res.json({
+      message: err.message,
+      statusCode: 403
+    })
+  }
+  console.log(spot)
+  spot.set({
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  })
+
+  await spot.save
+  res.json(spot)
+
+})
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/:spotId', async (req, res) => { // <<<<<<< me while writing this route https://www.youtube.com/watch?v=wkR6zN1h2TI
 
 let id = req.params.spotId
 let spot = await Spot.findByPk(id)
-
+console.log('get')
 if (!spot){
   const err = new Error('Search failed');
   err.message = "Spot couldn't be found.";
@@ -145,6 +188,41 @@ if(owner){
 
 
 res.json(jsonSpot)
+})
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.delete('/:spotId', requireAuth, async (req, res) =>{
+  const { user } = req;
+  const id = user.id
+  console.log(id)
+
+  const spotDelete = await Spot.findByPk(req.params.spotId)
+
+  if (!spotDelete) {
+    res.statusCode = 404
+    res.json({
+      message: "Spot couldn't be found",
+      statusCode: res.statusCode
+    })
+  }
+
+  if (spotDelete.ownerId !== id){
+    const err = new Error('Search failed');
+    err.message = "You are not authorized to do that.";
+    res.statusCode = '403';
+    return res.json({
+      message: err.message,
+      statusCode: 403
+    })
+  }
+
+  spotDelete.destroy()
+    res.statusCode = 200
+    res.json({
+      message: "Successfully deleted",
+      statusCode: res.statusCode
+    })
 })
 
 module.exports = router;
