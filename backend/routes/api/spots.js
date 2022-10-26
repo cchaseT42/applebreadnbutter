@@ -194,7 +194,7 @@ router.put('/:spotId', requireAuth, async (req, res) =>{
     })
 }
   if (spot.ownerId !== id){
-    console.log(spot.ownerId, id)
+    //console.log(spot.ownerId, id)
     const err = new Error('Search failed');
     err.message = "Forbidden";
     res.statusCode = '403';
