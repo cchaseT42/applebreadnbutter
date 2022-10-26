@@ -78,7 +78,7 @@ router.get('/current', restoreUser, async (req, res) => {
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-router.put('/:spotId', restoreUser, requireAuth, async (req, res) =>{
+router.put('/:spotId', requireAuth, async (req, res) =>{
   const { user } = req;
   const id = user.id
   const { address, city, state, country, lat, lng, name, description, price} = req.body
@@ -192,27 +192,21 @@ res.json(jsonSpot)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.delete('/:spotId', restoreUser, requireAuth, async (req, res) =>{
+router.delete('/:spotId', requireAuth, async (req, res) =>{
   const { user } = req;
   const id = user.id
   console.log(id)
 
   const spotDelete = await Spot.findByPk(req.params.spotId)
 
-  if (spotDelete) {
-    spotDelete.destroy()
-    res.statusCode = 200
-    res.json({
-      message: "Successfully deleted",
-      statusCode: res.statusCode
-    })
-  } else {
+  if (!spotDelete) {
     res.statusCode = 404
     res.json({
       message: "Spot couldn't be found",
       statusCode: res.statusCode
     })
   }
+
   if (spotDelete.ownerId !== id){
     const err = new Error('Search failed');
     err.message = "You are not authorized to do that.";
@@ -222,6 +216,13 @@ router.delete('/:spotId', restoreUser, requireAuth, async (req, res) =>{
       statusCode: 403
     })
   }
+
+  spotDelete.destroy()
+    res.statusCode = 200
+    res.json({
+      message: "Successfully deleted",
+      statusCode: res.statusCode
+    })
 })
 
 module.exports = router;
