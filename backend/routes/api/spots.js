@@ -157,7 +157,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
   if (spot.ownerId !== id) {
     const err = new Error('Failed')
-    err.message = "You are not authorized to do that."
+    err.message = "Forbidden"
     res.statsCode = '403'
     return res.json({
       message: err.message,
@@ -196,7 +196,7 @@ router.put('/:spotId', requireAuth, async (req, res) =>{
   if (spot.ownerId !== id){
     console.log(spot.ownerId, id)
     const err = new Error('Search failed');
-    err.message = "You are not authorized to do that.";
+    err.message = "Forbidden";
     res.statusCode = '403';
     return res.json({
       message: err.message,
@@ -312,7 +312,7 @@ router.delete('/:spotId', requireAuth, async (req, res) =>{
 
   if (spotDelete.ownerId !== id){
     const err = new Error('Search failed');
-    err.message = "You are not authorized to do that.";
+    err.message = "Forbidden";
     res.statusCode = '403';
     return res.json({
       message: err.message,
