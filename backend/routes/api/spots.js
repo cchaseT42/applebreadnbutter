@@ -3,7 +3,7 @@ const { json } = require('sequelize');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, User } = require('../../db/models');
+const { Spot, SpotImage, Review, User, Booking } = require('../../db/models');
 const spot = require('../../db/models/spot');
 
 const router = express.Router();
@@ -176,6 +176,120 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
   })
   return res.json(returnImg)
 
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+  const { user } = req;
+  const id = user.id
+
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  const {startDate, endDate} = req.body
+
+  if (!spot){
+    const err = new Error('Search failed');
+    err.message = "Spot couldn't be found.";
+    res.statusCode = '404';
+    return res.json({
+      message: err.message,
+      statusCode: 404
+    })
+  }
+
+  if (spot.ownerId === id){
+    const err = new Error('Denied');
+    err.message = "You cannot make a booking for a spot you own.";
+    res.statusCode = '403';
+    return res.json({
+      message: err.message,
+      statusCode: 403
+    })
+  }
+
+  const conflictingDate = await Booking.findAll({
+    where: {
+      spotId: spot.id,
+      startDate: {
+      [op.between]: [startDate, endDate]
+      },
+      endDate: {
+        [op.between]: [startDate, endDate]
+      }
+    }
+  })
+
+  if(conflictingDate.length){
+    const err = new Error('Conflicting dates');
+    err.message = "Sorry, this spot is already booked for the specified dates.",
+    res.statusCode = '403'
+    return res.json({
+      message: err.message,
+      statusCode: 403
+    })
+
+  }
+
+  const newBooking = await Booking.create({
+    spotId: spot.id,
+    userId: id,
+    startDate,
+    endDate
+  })
+  res.json(newBooking)
+})
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+  const { user } = req;
+  const id = user.id
+  let allBookings = []
+  const spot = await Spot.findByPk(req.params.spotId, {
+    attributes: ['ownerId']
+  })
+
+  if (!spot){
+    const err = new Error('Search failed');
+    err.message = "Spot couldn't be found.";
+    res.statusCode = '404';
+    return res.json({
+      message: err.message,
+      statusCode: 404
+    })
+  }
+
+  if (spot.ownerId !== id){
+    let booking = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId
+      },
+      attributes: ['spotId', 'startDate', 'endDate']
+    })
+
+    for(let i = 0; i < booking.length; i++) {
+      let currentBooking = booking[i].toJSON()
+      allBookings.push(currentBooking)
+    }
+  }
+
+  if (spot.ownerId === id){
+    let booking = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId
+      }
+    })
+    for(let i = 0; i < booking.length; i++) {
+      let currentBooking = booking[i].toJSON()
+      let user = await User.findByPk(currentBooking.userId, {
+        attributes: ['id', 'firstName', 'lastName']
+      })
+
+      currentBooking.User = user
+      allBookings.push(currentBooking)
+    }
+
+  }
+
+  res.json({"Bookings": allBookings})
 })
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.put('/:spotId', requireAuth, async (req, res) =>{
