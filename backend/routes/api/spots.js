@@ -3,7 +3,7 @@ const { json } = require('sequelize');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, User, Booking } = require('../../db/models');
+const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../db/models');
 const spot = require('../../db/models/spot');
 
 const router = express.Router();
@@ -135,6 +135,55 @@ router.get('/current', restoreUser, async (req, res) => {
 
   }
   res.json({'Spots': updatedSpots})
+})
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.get('/:spotId/reviews', async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId)
+  if (!spot){
+    const err = new Error('Search failed');
+    err.message = "Spot couldn't be found.";
+    res.statusCode = '404';
+    return res.json({
+      message: err.message,
+      statusCode: 404
+    })
+  }
+
+  let allReviews = []
+
+  const reviews = await Review.findAll({
+    where: {
+      spotId: spot.id
+    }
+  })
+
+  for(let i = 0; i < reviews.length; i++){
+
+    //console.log('made it 1')
+    let review = reviews[i].toJSON()
+    const reviewUser = await User.findByPk(reviews[i].userId, {
+      attributes: ['id', 'firstName', 'lastName']
+    })
+
+    review.User = reviewUser
+
+    const reviewImages = await ReviewImage.findAll({
+      where: {
+        reviewId: review.id
+      },
+      attributes: ['id', 'url']
+    })
+
+    let reviewImagesArr = []
+    for(let i = 0; i < reviewImages.length; i++){
+      let reviewImage = reviewImages[i].toJSON()
+      reviewImagesArr.push(reviewImage)
+    }
+    review.ReviewImages = reviewImagesArr
+    allReviews.push(review)
+  }
+
+  res.json({'Reviews': allReviews})
 })
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
