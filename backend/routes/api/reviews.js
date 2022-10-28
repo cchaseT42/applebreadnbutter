@@ -3,9 +3,24 @@ const { json } = require('sequelize');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
+const { check } = require('express-validator');
 const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../db/models');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
+
+// const validateReview = [
+//   check('review')
+//   .exists({ checkFalsy: true})
+//   .isString()
+//   .withMessage("Review text is required"),
+//   check('stars')
+//   .exists({ checkFalsy: true})
+//   .isInt()
+//   .withMessage("Stars must be an integer from 1 to 5"),
+//   handleValidationErrors
+// ]
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.get('/current', requireAuth, async (req, res) => {
   const { user } = req;
@@ -118,12 +133,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       })
   }
 
-  const reviewImage = ReviewImage.create({
+  const reviewImage = await ReviewImage.create({
     reviewId: review.id,
     url: url
   })
 
-  res.json(reviewImage)
+  const reviewImageToReturn = await ReviewImage.findByPk(reviewImage.id, {
+    attributes: ['id', 'url']
+  })
+
+  res.json(reviewImageToReturn)
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.delete('/:reviewId', requireAuth, async (req, res) => {

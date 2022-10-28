@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, User, ReviewImage } = require('../../db/models');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 

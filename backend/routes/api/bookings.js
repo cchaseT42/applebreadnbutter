@@ -5,6 +5,7 @@ const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, User, Booking } = require('../../db/models');
 const spot = require('../../db/models/spot');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -26,18 +27,21 @@ router.get('/current', requireAuth, async (req, res) => {
       attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
     })
 
-    let images = await SpotImage.findAll({
+    let images = await SpotImage.findOne({
       where: {
         spotId: spot.id,
       },
       attributes: ['id', 'spotId', 'url']
     })
-    let jsonImages = images[0].toJSON()
+
+
+    //let jsonImages = images.toJSON()
 
     let jsonSpot = spot.toJSON()
 
-    if (jsonImages){
-      jsonSpot.previewImage = images[0].url
+    if (images){
+
+      jsonSpot.previewImage = images.toJSON().url
     }
 
     //console.log(jsonSpot)
@@ -76,8 +80,10 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
   }
 
   const currentDate = new Date()
+  const time = currentDate.getTime()
+  const timetoCompare = booking.startDate.toDateString()
 
-  if (currentDate > booking.startDate) {
+  if (time > timetoCompare) {
     const err = new Error('Forbidden');
     err.message = "Bookings that have been started can't be deleted.";
     res.statusCode = '403';

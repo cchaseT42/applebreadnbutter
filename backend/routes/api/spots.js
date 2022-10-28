@@ -3,14 +3,37 @@ const { json } = require('sequelize');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 const { restoreUser, requireAuth } = require('../../utils/auth');
+const { check } = require('express-validator');
 const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../db/models');
 
 const router = express.Router();
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateReview = [
+  check('review')
+  .exists({ checkFalsy: true})
+  .isString()
+  .withMessage("Review text is required"),
+  check('stars')
+  .exists({ checkFalsy: true})
+  .isInt({ min: 1, max: 5 })
+  .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors
+]
+
+const validateSpot = []
+const validateQueryParams = [
+  check('page')
+  .isInt({ min: 1})
+  .exists({ checkFalsy: true})
+  .withMessage("Page must be greater than or equal to 1"),
+  handleValidationErrors
+]
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-router.get('/', async (req, res, next) => {
+router.get('/', validateQueryParams, async (req, res, next) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
   page = parseInt(page);
   size = parseInt(size);
@@ -28,7 +51,7 @@ router.get('/', async (req, res, next) => {
   if (Number.isNaN(minLng) || minLng < -180) minLng = -180
   if (Number.isNaN(maxLng) || maxLng > 180) maxLng = 180
   if (Number.isNaN(minPrice) || minPrice < 0) minPrice = 0
-  if (Number.isNaN(maxPrice)) maxPrice = 100000000
+  if (Number.isNaN(maxPrice)) maxPrice = 10000000
 
   const spots = await Spot.findAll({
     where: {
@@ -71,7 +94,9 @@ router.get('/', async (req, res, next) => {
     updatedSpots.push(spot)
 
   }
-  res.json({'Spots': updatedSpots}, {'page': page}, {'size': size})
+
+  //console.log(page, size)
+  return res.json({'Spots': updatedSpots, 'page': page, 'size': size})
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,17 +162,8 @@ router.get('/current', restoreUser, async (req, res) => {
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
   const { review, stars } = req.body
-
-  // if ((!review || (!typeof review === 'string')) || (!stars || !Number.isNaN(stars))) {
-  //   const validationErr = new Error()
-  //   validationErr.statusCode = 400
-  //   validationErr.message = 'Validation error'
-  //   if (!review || (!typeof review === 'string')) validationErr.errors.review = "Review text is required"
-  //   if (!stars || !Number.isNaN(stars)) validationErr.errors.stars = "Stars must be an integer from 1 to 5"
-  //   return res.json(validationErr.message, validationErr.statusCode, validationErr.errors)
-  // }
 
   const { user } = req;
   const id = user.id
@@ -308,17 +324,21 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     })
   }
 
+  const newStart = new Date(startDate)
+  const newEnd = new Date(endDate)
   const conflictingDate = await Booking.findAll({
     where: {
       spotId: spot.id,
       startDate: {
-      [op.between]: [startDate, endDate]
+      [op.between]: [newStart, newEnd]
       },
       endDate: {
-        [op.between]: [startDate, endDate]
+        [op.between]: [newStart, newEnd]
       }
     }
   })
+
+  console.log(conflictingDate)
 
   if(conflictingDate.length){
     const err = new Error('Conflicting dates');
