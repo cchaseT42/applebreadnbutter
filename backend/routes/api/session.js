@@ -48,15 +48,15 @@ router.delete(
   }
 );
 
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
+router.get('/', restoreUser, async (req, res) => {
     const { user } = req;
     if (user) {
-      return res.json({
-        user: user.toSafeObject()
-      });
+      const currentUser = await User.findByPk(user.id, {
+        attributes: ['id', 'firstName', 'lastName', 'email', 'username']
+      })
+
+      console.log(user.id, currentUser)
+      return res.json(currentUser)
     } else return res.json({});
   }
 );
@@ -111,9 +111,9 @@ router.post(
 
     await setTokenCookie(res, user);
 
-    return res.json({
-      'user': newUser
-    });
+    return res.json(
+      newUser
+    );
   }
 );
 

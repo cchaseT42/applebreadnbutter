@@ -34,10 +34,26 @@ router.get('/current', requireAuth, async (req, res) => {
       attributes: ['id', 'spotId', 'url']
     })
 
+    let jsonSpot = spot.toJSON()
+
+    const previewImage = await SpotImage.findAll({
+      raw: true,
+      where: { preview: true, spotId: spot.id},
+      attributes: ['url']
+    })
+
+    if(previewImage.length){
+      jsonSpot.previewImage = previewImage[0].url
+    }
+
+    if(!previewImage.length){
+      jsonSpot.previewImage = null
+    }
+
 
     //let jsonImages = images.toJSON()
 
-    let jsonSpot = spot.toJSON()
+
 
     if (images){
 

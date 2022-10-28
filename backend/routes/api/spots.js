@@ -111,6 +111,10 @@ router.get('/', async (req, res, next) => {
       spot.previewImage = previewImage[0].url
     }
 
+    if(!previewImage.length){
+      spot.previewImage = null
+    }
+
     updatedSpots.push(spot)
 
   }

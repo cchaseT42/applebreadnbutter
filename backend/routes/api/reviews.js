@@ -58,6 +58,8 @@ router.get('/current', requireAuth, async (req, res) => {
       })
     }
 
+    let jsonSpot = spot.toJSON()
+
     const previewImage = await SpotImage.findAll({
       raw: true,
       where: { preview: true, spotId: spot.id},
@@ -79,10 +81,14 @@ router.get('/current', requireAuth, async (req, res) => {
     }
 
     if(previewImage.length){
-      spot.previewImage = previewImage[0].url
+      jsonSpot.previewImage = previewImage[0].url
     }
 
-    review.Spot = spot.toJSON()
+    if(!previewImage.length){
+      jsonSpot.previewImage = null
+    }
+
+    review.Spot = jsonSpot
     review.ReviewImages = reviewImagesArr
     allReviews.push(review)
   }
