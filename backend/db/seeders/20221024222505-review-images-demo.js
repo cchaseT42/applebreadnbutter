@@ -24,7 +24,20 @@ module.exports = {
     {
       reviewId: 3,
       url: "imgurl3.com"
-    }
+    },
+    {
+      reviewId: 4,
+      url: "imgurl4.com"
+    },
+    {
+      reviewId: 5,
+      url: "imgurl5.com"
+    },
+    {
+      reviewId: 6,
+      url: "imgurl6.com"
+    },
+
    ])
   },
 
