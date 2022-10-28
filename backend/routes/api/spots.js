@@ -11,30 +11,50 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const validateReview = [
   check('review')
-  .exists({ checkFalsy: true})
   .isString()
   .withMessage("Review text is required"),
   check('stars')
-  .exists({ checkFalsy: true})
   .isInt({ min: 1, max: 5 })
   .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors
 ]
 
 const validateSpot = []
-const validateQueryParams = [
-  check('page')
-  .isInt({ min: 1})
-  .exists({ checkFalsy: true})
-  .withMessage("Page must be greater than or equal to 1"),
-  handleValidationErrors
-]
+const validateQueryParams = []
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-router.get('/', validateQueryParams, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+  console.log(page)
+
+ let errors = {}
+
+  if (page && (isNaN(page) || page < 1)) errors.page = "Page must be greater than or equal to 1"
+  if (size && ((isNaN(size)) || (size < 1))) errors.size = "Size must be greater than or equal to 1"
+  if (maxLat && ((isNaN(maxLat)) || ((maxLat > 90) || (maxLat < -90)))) errors.maxLat = "Maximum latitude is invalid"
+  if (minLat && ((isNaN(minLat)) || ((minLat < -90) || (minLat > 90)))) errors.minLat = "Minimum latitude is invalid"
+  if (maxLng && ((isNaN(maxLng)) || ((maxLng > 180) || (maxLng < -180)))) errors.maxLng = "Maximum longitude is invalid"
+  if (minLng && ((isNaN(minLng)) || ((minLng < -180) || (minLng > 180)))) errors.minLng = "Minimum longitude is invalid"
+  if (minPrice && ((isNaN(minPrice)) || (minPrice < 0))) errors.minPrice = "Minimum price must be greater than or equal to 0"
+  if (maxPrice && ((isNaN(maxPrice)) || (maxPrice < 0))) errors.maxPrice = "Maximum price must be greater than or equal to 0"
+
+  const errSize = Object.keys(errors).length
+  console.log(errSize)
+
+    if (errSize){
+      const err = new Error('Put Failed');
+      err.status = 400;
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
+
   page = parseInt(page);
   size = parseInt(size);
   minLat = parseInt(minLat);
@@ -105,6 +125,34 @@ router.post('/', requireAuth, async (req, res) => {
   const id = user.id
   const { address, city, state, country, lat, lng, name, description, price} = req.body
 
+  let errors = {}
+
+  if (!address || !(typeof address === 'string')) errors.address = "Street address is required."
+  if (!city || !(typeof city === 'string')) errors.city = "City is required."
+  if (!state || !(typeof state === 'string')) errors.state = "State is required."
+  if (!country || !(typeof country === 'string')) errors.country = "Country is required."
+  if (!lat || (Number.isNaN(lat)) || (lat > 90 || lat < -90)) errors.lat = "Latitude is not valid"
+  if (!lng || (Number.isNaN(lng)) || (lng > 180 || lat < -180)) errors.lat = "Longitude is not valid"
+  if (!name || !(typeof name === 'string') || (name.length > 50)) errors.name = "Name must be less than 50 characters"
+  if (!description || !(typeof description === 'string')) errors.description = "Description is required."
+  if (!price || (Number.isNaN(price))) errors.lat = "Price per day is required"
+
+
+
+
+  const errSize = Object.keys(errors).length
+
+    if (errSize){
+      const err = new Error('Put Failed');
+      err.status = 400;
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
+
   let spot = await Spot.create({
     ownerId: id,
     address,
@@ -162,8 +210,27 @@ router.get('/current', restoreUser, async (req, res) => {
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
   const { review, stars } = req.body
+
+  let errors = {}
+
+  if (!review || !(typeof review === 'string')) errors.review = "Review text is required"
+  if (!stars || (Number.isNaN(stars)) ||(stars > 5 || stars < 1)) errors.stars = "Stars must be an integer from 1 to 5"
+
+  const errSize = Object.keys(errors).length
+
+    if (errSize){
+      const err = new Error('Post Failed');
+      err.status = 400;
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
+
 
   const { user } = req;
   const id = user.id
@@ -417,6 +484,34 @@ router.put('/:spotId', requireAuth, async (req, res) =>{
   const { user } = req;
   const id = user.id
   const { address, city, state, country, lat, lng, name, description, price} = req.body
+
+  let errors = {}
+
+  if (!address || !(typeof address === 'string')) errors.address = "Street address is required."
+  if (!city || !(typeof city === 'string')) errors.city = "City is required."
+  if (!state || !(typeof state === 'string')) errors.state = "State is required."
+  if (!country || !(typeof country === 'string')) errors.country = "Country is required."
+  if (!lat || (Number.isNaN(lat)) || (lat > 90 || lat < -90)) errors.lat = "Latitude is not valid"
+  if (!lng || (Number.isNaN(lng)) || (lng > 180 || lat < -180)) errors.lat = "Longitude is not valid"
+  if (!name || !(typeof name === 'string') || (name.length > 50)) errors.name = "Name must be less than 50 characters"
+  if (!description || !(typeof description === 'string')) errors.description = "Description is required."
+  if (!price || (Number.isNaN(price))) errors.lat = "Price per day is required"
+
+
+
+
+  const errSize = Object.keys(errors).length
+
+    if (errSize){
+      const err = new Error('Put Failed');
+      err.status = 400;
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
 
   let spot = await Spot.findByPk(req.params.spotId)
   if (!spot){

@@ -63,9 +63,33 @@ router.get(
 
 router.post(
   '/',
-  validateLogin,
+  //validateLogin,
   async (req, res, next) => {
     const { credential, password } = req.body;
+
+    let errors = {}
+
+    if (!credential){
+      errors.credential = "Email or username is required"
+    }
+
+    if (!password){
+      errors.password = "Password is required"
+    }
+
+    const errSize = Object.keys(errors).length
+
+    if (errSize){
+      const err = new Error('Login failed');
+      err.status = 400;
+      err.title = 'Login failed';
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
 
     const user = await User.login({ credential, password });
 
@@ -73,14 +97,22 @@ router.post(
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
-      return next(err);
+      err.message = 'Invalid credentials';
+      return res.json({
+        message: err.message,
+        statusCode: 401
+      })
     }
+
+    console.log(user.id)
+    const newUser = await User.findByPk(user.id, {
+      attributes: ['id', 'firstName', 'lastName', 'email', 'username']
+    })
 
     await setTokenCookie(res, user);
 
     return res.json({
-      user
+      'user': newUser
     });
   }
 );

@@ -186,6 +186,24 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
   const { review, stars } = req.body
 
+  let errors = {}
+
+  if (!review || !(typeof review === 'string')) errors.review = "Review text is required"
+  if (!stars || (Number.isNaN(stars)) ||(stars > 5 || stars < 1)) errors.stars = "Stars must be an integer from 1 to 5"
+
+  const errSize = Object.keys(errors).length
+
+    if (errSize){
+      const err = new Error('Post Failed');
+      err.status = 400;
+      err.message = 'Validation error';
+      return res.json({
+        message: err.message,
+        statusCode: 400,
+        errors
+      })
+    }
+
   const reviewToEdit = await Review.findByPk(req.params.reviewId)
 
   if (!reviewToEdit){

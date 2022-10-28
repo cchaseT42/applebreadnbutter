@@ -30,9 +30,11 @@ const validateSignup = [
 
 router.post(
   '/',
-  validateSignup,
+  //validateSignup,
   async (req, res) => {
     const { email, password, username, firstName, lastName } = req.body;
+
+    //if(!email)
 
     const usedEmail = await User.findOne({
       where:{
@@ -74,10 +76,14 @@ router.post(
 
     const user = await User.signup({ email, username, password, firstName, lastName });
 
+    const newUser = await User.findByPk(user.id, {
+      attributes: ['id', 'firstName', 'lastName', 'email', 'username']
+    })
+
     await setTokenCookie(res, user);
 
     return res.json({
-      user,
+      'user': newUser
     });
   }
 );
