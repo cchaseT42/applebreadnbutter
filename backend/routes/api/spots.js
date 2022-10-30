@@ -28,7 +28,7 @@ const validateQueryParams = []
 router.get('/', async (req, res, next) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-  console.log(page)
+  //console.log(page)
 
  let errors = {}
 
@@ -42,7 +42,7 @@ router.get('/', async (req, res, next) => {
   if (maxPrice && ((isNaN(maxPrice)) || (maxPrice < 0))) errors.maxPrice = "Maximum price must be greater than or equal to 0"
 
   const errSize = Object.keys(errors).length
-  console.log(errSize)
+  //console.log(errSize)
 
     if (errSize){
       const err = new Error('Put Failed');
@@ -169,7 +169,7 @@ router.post('/', requireAuth, async (req, res) => {
     description,
     price
   })
-
+  res.statusCode = 201
   res.json(spot)
 })
 
@@ -205,6 +205,10 @@ router.get('/current', restoreUser, async (req, res) => {
     // console.log(previewImage[0].url)
     if(previewImage.length){
       spot.previewImage = previewImage[0].url
+    }
+
+    if(!previewImage.length){
+      spot.previewImage = null
     }
 
     updatedSpots.push(spot)
@@ -272,7 +276,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     review,
     stars
   })
-
+  res.statusCode = 201
   res.json(newReview)
 })
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -409,7 +413,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     }
   })
 
-  console.log(conflictingDate)
+  //console.log(conflictingDate)
 
   if(conflictingDate.length){
     const err = new Error('Conflicting dates');
@@ -463,17 +467,22 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     }
   }
 
-  if (spot.ownerId === id){
+  if (spot.ownerId === id){           //spent 30 minutes trying to fix this. wasn't broken at all.
+    //console.log('owner')
     let booking = await Booking.findAll({
       where: {
         spotId: req.params.spotId
       }
     })
+    //console.log(booking)
     for(let i = 0; i < booking.length; i++) {
       let currentBooking = booking[i].toJSON()
       let user = await User.findByPk(currentBooking.userId, {
+        raw: true,
         attributes: ['id', 'firstName', 'lastName']
       })
+
+
 
       currentBooking.User = user
       allBookings.push(currentBooking)
@@ -537,7 +546,7 @@ router.put('/:spotId', requireAuth, async (req, res) =>{
       statusCode: 403
     })
   }
-  console.log(spot)
+  //console.log(spot)
   spot.update({
     address,
     city,
@@ -561,7 +570,7 @@ router.get('/:spotId', async (req, res) => { // <<<<<<< me while writing this ro
 
 let id = req.params.spotId
 let spot = await Spot.findByPk(id)
-console.log('get')
+//console.log('get')
 if (!spot){
   const err = new Error('Search failed');
   err.message = "Spot couldn't be found.";
@@ -580,13 +589,14 @@ let ownerId = await Spot.findByPk(id, {
 let images = await SpotImage.findAll({
   where: {
     spotId: id,
+    preview: true
   },
-  attributes: ['id', 'spotId', 'url']
+  attributes: ['id', 'url', 'preview']
 })
 
 
 let jsonSpot = spot.toJSON()
-let jsonImages = images[0].toJSON()
+let jsonImages = images[0]
 //console.log(jsonImages)
 
 
@@ -619,6 +629,9 @@ if (avgStarRating){
 if (jsonImages){
   jsonSpot.SpotImages = images
 }
+if (!jsonImages){
+  jsonSpot.SpotImages = null
+}
 if(owner){
   jsonSpot.Owner = owner[0]
 }
@@ -632,7 +645,7 @@ res.json(jsonSpot)
 router.delete('/:spotId', requireAuth, async (req, res) =>{
   const { user } = req;
   const id = user.id
-  console.log(id)
+  //console.log(id)
 
   const spotDelete = await Spot.findByPk(req.params.spotId)
 

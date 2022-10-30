@@ -27,12 +27,12 @@ router.get('/current', requireAuth, async (req, res) => {
       attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
     })
 
-    let images = await SpotImage.findOne({
-      where: {
-        spotId: spot.id,
-      },
-      attributes: ['id', 'spotId', 'url']
-    })
+    // let images = await SpotImage.findOne({
+    //   where: {
+    //     spotId: spot.id,
+    //   },
+    //   attributes: ['id', 'spotId', 'url']
+    // })
 
     let jsonSpot = spot.toJSON()
 
@@ -55,14 +55,14 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 
-    if (images){
+    // if (images){
 
-      jsonSpot.previewImage = images.toJSON().url
-    }
+    //   jsonSpot.previewImage = images.toJSON().url
+    // }
 
     //console.log(jsonSpot)
     booking.Spot = jsonSpot
-    console.log(booking)
+    //console.log(booking)
     bookingSpots.push(booking)
   }
 
@@ -147,7 +147,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     }
   })
 
-  console.log(conflictingDate)
+  //console.log(conflictingDate)
 
   if (booking.userId !== id) {
     const err = new Error('Forbidden');

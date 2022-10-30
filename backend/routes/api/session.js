@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -48,14 +48,14 @@ router.delete(
   }
 );
 
-router.get('/', restoreUser, async (req, res) => {
+router.get('/', requireAuth, restoreUser,  async (req, res) => {
     const { user } = req;
     if (user) {
       const currentUser = await User.findByPk(user.id, {
         attributes: ['id', 'firstName', 'lastName', 'email', 'username']
       })
 
-      console.log(user.id, currentUser)
+      //console.log(user.id, currentUser)
       return res.json(currentUser)
     } else return res.json({});
   }
@@ -104,7 +104,7 @@ router.post(
       })
     }
 
-    console.log(user.id)
+    //console.log(user.id)
     const newUser = await User.findByPk(user.id, {
       attributes: ['id', 'firstName', 'lastName', 'email', 'username']
     })
