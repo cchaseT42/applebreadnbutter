@@ -83,7 +83,7 @@ router.post(
     await setTokenCookie(res, user);
 
     return res.json(
-      newUser
+      {"user": newUser}
     );
   }
 );
