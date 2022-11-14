@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getSpots } from '../../store/spots';
+import './SpotsPreview.css'
 
 
 
@@ -10,6 +11,7 @@ function PreviewAllSpots(){
   const dispatch = useDispatch();
 
   const spots = useSelector(state => state.spots)
+  console.log(spots)
 
   useEffect(() => {
     dispatch(getSpots());
@@ -17,11 +19,15 @@ function PreviewAllSpots(){
 
 
   return (
-    <div>
-      <div className={'spots'}>
-        {spots.map((spot) => {
+    <div className="body">
+      <div className='spots'>
+        {Object.values(spots).map((spot) => {
           return (
-            <div key={spot.id} className="spot" style={{ backgroundImage: `url('${spot.previewImage})`}}></div>
+            <div key={spot.id} className="spot">
+              <img src={spot.previewImage}/>
+              <span className='location'>{spot.city}, {spot.state}</span>
+              <span className = 'price'>${spot.price} night</span>
+            </div>
           )
         })}
       </div>

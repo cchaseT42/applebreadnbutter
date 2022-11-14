@@ -23,11 +23,16 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
+    <ul className='nav'>
+      <li className='navLinks checkListings'>
+        <NavLink exact to="/">Check all listings</NavLink>
       </li>
+      <li className='navLinks becomeHost'>
+        <NavLink exact to="/">Become a Host</NavLink>
+      </li>
+      <li className='navLinks button'>
+        {isLoaded && sessionLinks}
+        </li>
     </ul>
   );
 }

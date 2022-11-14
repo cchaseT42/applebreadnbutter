@@ -19,13 +19,13 @@ export const getSpots = () => async dispatch => {
 }
 
 
-let initialState = []
+let initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
   case LOAD:
     const newState = {}
-    action.payload.forEach(spot => {
+    action.payload.Spots.forEach(spot => {
       newState[spot.id] = spot
     });
     return {

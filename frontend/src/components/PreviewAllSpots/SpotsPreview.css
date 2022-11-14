@@ -1,0 +1,29 @@
+.body {
+  padding-left: 80px;
+  padding-right: 80px;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.spots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.spot {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
+}
+
+.location {
+  font-weight: bold;
+}
+
+img {
+  width: 265px;
+  height: 260px;
+  border-radius: 10px;
+}
