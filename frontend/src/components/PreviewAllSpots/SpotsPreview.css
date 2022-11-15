@@ -15,7 +15,7 @@
 .spot {
   display: flex;
   flex-direction: column;
-  padding-bottom: 25px;
+  padding-bottom: 40px;
 }
 
 .location {
