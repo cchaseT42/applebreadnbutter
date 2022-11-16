@@ -28,10 +28,8 @@ let initialState = {}
 const imageReducer = (state = initialState, action) => {
 switch (action.type) {
   case CREATE:
-    return {
-      ...state,
-      entries: {...state, [action.image.id]: action.image}
-    }
+    const newState = {...state, [action.image.id]: action.image}
+    return newState
     default: return state;
 }
 }

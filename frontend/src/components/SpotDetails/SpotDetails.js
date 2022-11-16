@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { destroySpot, getSpots, getOneSpot } from '../../store/spots';
+import { destroySpot, getOneSpot } from '../../store/spots';
 
 function SpotDetails() {
 
@@ -10,25 +10,10 @@ function SpotDetails() {
   const { spotId } = useParams()
   const spots = useSelector(state => state.spots)
   const spot = Object.values(spots).find(spot => spot.id == spotId)
-  let image = spot.SpotImages.find(spot => spot.id == spotId)
-
-  console.log(spot)
-  console.log(image)
-
-  // console.log('spot', spots)
-
-
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
   }, [dispatch])
-
-  // let destroy = () => {
-  //   dispatch(destroySpot(spotId))
-  //   history.push('/')
-  // }
-
-  // onClick={destroy()}
 
   return (
     <div className="spotDetails">
