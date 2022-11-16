@@ -24,11 +24,11 @@ function PreviewAllSpots(){
         {Object.values(spots).map((spot) => {
           return (
             <div key={spot.id} className="spot">
-              <Link to={`/api/spots/${spot.id}`}>
+              <Link to={`/spots/${spot.id}`}>
               <img src={spot.previewImage}/>
               </Link>
               <span className='location'>{spot.city}, {spot.state}</span>
-              <span className = 'price'>${spot.price} night</span>
+              <span className='price'>${spot.price} night</span>
             </div>
           )
         })}

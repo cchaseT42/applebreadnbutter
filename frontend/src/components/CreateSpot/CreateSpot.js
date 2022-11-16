@@ -45,7 +45,7 @@ const handleSubmit = async (e) => {
 
   let spotImage = await dispatch (addImage(imagePayload, spotId))
   spotImage.spotId = await spotId
-  await history.push('/')
+  await history.push(`/spots/${spotId}`)
 };
 
 useEffect(() => {

@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const LOAD = 'spots/getSpots'
 const CREATE = 'spots/createSpot'
 const DELETE = 'spots/deleteSpot'
+const GET_ONE = 'spots/getOne'
 ////////////////////////////////////////////////////
 const load = (spots) => {
   return {
@@ -25,6 +26,14 @@ const destroy = (spot) => {
   }
 }
 ///////////////////////////////////////////////////////
+const getOne = (spot) => {
+  return {
+    type: GET_ONE,
+    spot
+  }
+}
+
+///////////////////////////////////////////////////////
 export const getSpots = () => async dispatch => {
   const response = await fetch(`/api/spots`)
 
@@ -46,6 +55,19 @@ export const createSpot = (data) => async dispatch => {
   dispatch(create(spot))
   return spot
 }
+
+////////////////////////////////////////////////////
+
+export const getOneSpot = (spotId) => async dispatch => {
+  const response = await fetch(`/api/spots/${spotId}`)
+
+  if (response.ok) {
+    const spot = await response.json()
+    dispatch(getOne(spot))
+    return
+  }
+}
+
 ////////////////////////////////////////////////////
 
 export const destroySpot = (spotId) => async dispatch => {
@@ -80,6 +102,13 @@ const spotsReducer = (state = initialState, action) => {
         ...state,
         entries: {...state, [action.spot.id]: action.spot}
       }
+    case GET_ONE:
+      newState[action.spot.id] = action.spot
+    return {
+      ...newState,
+      ...state
+    }
+
     default: return state;
   }
 };
