@@ -63,6 +63,7 @@ export const getOneSpot = (spotId) => async dispatch => {
 
   if (response.ok) {
     const spot = await response.json()
+    console.log('spot returned from database:', spot)
     dispatch(getOne(spot))
     return
   }
@@ -88,26 +89,21 @@ let initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
-  case LOAD:
+  case LOAD: {
     const newState = {}
     action.payload.Spots.forEach(spot => {
       newState[spot.id] = spot
     });
-    return {
-      ...newState,
-      ...state
+    return newState
+  }
+    case CREATE: {
+      const newState = {...state, [action.spot.id]: action.spot}
+      return newState
     }
-    case CREATE:
-      return {
-        ...state,
-        entries: {...state, [action.spot.id]: action.spot}
-      }
-    case GET_ONE:
-      newState[action.spot.id] = action.spot
-    return {
-      ...newState,
-      ...state
-    }
+    case GET_ONE: {
+      const newState = {[action.spot.id]: action.spot}
+      return newState
+  }
 
     default: return state;
   }
