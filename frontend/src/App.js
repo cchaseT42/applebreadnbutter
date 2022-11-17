@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PreviewAllSpots from "./components/PreviewAllSpots";
 import CreateSpot from "./components/CreateSpot/CreateSpot"
+import EditSpot from "./components/editSpot/editSpot";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path = "/create" exact>
             <CreateSpot/>
+          </Route>
+          <Route path = "/edit/:spotId">
+            <EditSpot/>
           </Route>
         </Switch>
       )}

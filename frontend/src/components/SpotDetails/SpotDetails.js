@@ -22,6 +22,11 @@ function SpotDetails() {
     await history.push('/')
   }
 
+  const updateSpot = async (e) => {
+    e.preventDefault();
+    await history.push(`/edit/${spotId}`)
+  }
+
 
 
 
@@ -34,6 +39,7 @@ function SpotDetails() {
       <h3>{spot.price}</h3>
       <p>{spot.description}</p>
       <button onClick={deleteSpot}>Delete Spot</button>
+      <button onClick={updateSpot}>Edit Spot</button>
     </div>
   )
 }

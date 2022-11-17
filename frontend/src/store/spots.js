@@ -5,6 +5,7 @@ const CREATE = 'spots/createSpot'
 const DELETE = 'spots/deleteSpot'
 const GET_ONE = 'spots/getOne'
 const RESET = 'spots/reset'
+const UPDATE = 'spots/update'
 ////////////////////////////////////////////////////
 const load = (spots) => {
   return {
@@ -27,6 +28,13 @@ const destroy = (spot) => {
   }
 }
 ///////////////////////////////////////////////////////
+const update = (spot) => {
+  return {
+    type: UPDATE,
+    spot
+  }
+}
+//////////////////////////////////////////////////////
 const getOne = (spot) => {
   return {
     type: GET_ONE,
@@ -64,6 +72,19 @@ export const createSpot = (data) => async dispatch => {
   return spot
 }
 
+////////////////////////////////////////////////////
+export const editSpot = (data, spotId) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const updatedSpot = await response.json()
+  dispatch(update(updatedSpot))
+  return updatedSpot
+}
 ////////////////////////////////////////////////////
 
 export const getOneSpot = (spotId) => async dispatch => {
@@ -115,6 +136,10 @@ const spotsReducer = (state = initialState, action) => {
     case DELETE: {
       const newState = {...state}
       delete newState[action.spotId];
+      return newState
+    }
+    case UPDATE: {
+      const newState = {...state, [action.spot.id]: action.spot}
       return newState
     }
 
