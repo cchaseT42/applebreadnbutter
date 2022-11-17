@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
+import SpotReviews from '../SpotReviews/SpotReviews';
 
 function SpotDetails() {
 
@@ -9,14 +10,28 @@ function SpotDetails() {
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
-    console.log('dispatched get one spot')
   }, [dispatch])
 
   const history = useHistory()
   const { spotId } = useParams()
   const spot = useSelector(state => state.spots[spotId])
-  console.log('spots from spotDetail', spot)
   if (!spot?.SpotImages) return null
+
+  const deleteSpot = async (e) => {
+    e.preventDefault();
+    await dispatch(destroySpot(spotId))
+    await history.push('/')
+  }
+
+  const reroute = async (e) => {
+    e.preventDefault();
+    await history.push(`/spots/${spotId}/create`)
+  }
+
+  const updateSpot = async (e) => {
+    e.preventDefault();
+    await history.push(`/edit/${spotId}`)
+  }
 
 
 
@@ -29,7 +44,12 @@ function SpotDetails() {
       <h3>{spot.country}</h3>
       <h3>{spot.price}</h3>
       <p>{spot.description}</p>
-      <button id='delete' type ='submit'>Delete Spot</button>
+      <button onClick={deleteSpot}>Delete Spot</button>
+      <button onClick={updateSpot}>Edit Spot</button>
+      <button onClick={reroute}>Leave Review</button>
+      <div>
+      <SpotReviews/>
+      </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ const CREATE = 'spots/createSpot'
 const DELETE = 'spots/deleteSpot'
 const GET_ONE = 'spots/getOne'
 const RESET = 'spots/reset'
+const UPDATE = 'spots/update'
 ////////////////////////////////////////////////////
 const load = (spots) => {
   return {
@@ -27,6 +28,13 @@ const destroy = (spot) => {
   }
 }
 ///////////////////////////////////////////////////////
+const update = (spot) => {
+  return {
+    type: UPDATE,
+    spot
+  }
+}
+//////////////////////////////////////////////////////
 const getOne = (spot) => {
   return {
     type: GET_ONE,
@@ -65,13 +73,26 @@ export const createSpot = (data) => async dispatch => {
 }
 
 ////////////////////////////////////////////////////
+export const editSpot = (data, spotId) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const updatedSpot = await response.json()
+  dispatch(update(updatedSpot))
+  return updatedSpot
+}
+////////////////////////////////////////////////////
 
 export const getOneSpot = (spotId) => async dispatch => {
   const response = await fetch(`/api/spots/${spotId}`)
 
   if (response.ok) {
     const spot = await response.json()
-    console.log('spot returned from database:', spot)
+    //console.log('spot returned from database:', spot)
     dispatch(getOne(spot))
     return
   }
@@ -83,12 +104,9 @@ export const destroySpot = (spotId) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'delete'
   })
-
-  if (response.ok) {
-    const spots = await fetch(`/api/spots`)
-    const updatedSpots = await spots.json()
-    dispatch(load(updatedSpots))
-  }
+    if (response.ok){
+    dispatch(destroy(spotId))
+    }
 }
 
 ////////////////////////////////////////////////////
@@ -115,6 +133,15 @@ const spotsReducer = (state = initialState, action) => {
     case RESET: {
       return initialState
   }
+    case DELETE: {
+      const newState = {...state}
+      delete newState[action.spotId];
+      return newState
+    }
+    case UPDATE: {
+      const newState = {...state, [action.spot.id]: action.spot}
+      return newState
+    }
 
     default: return state;
   }

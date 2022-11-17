@@ -6,7 +6,10 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import PreviewAllSpots from "./components/PreviewAllSpots";
 import CreateSpot from "./components/CreateSpot/CreateSpot"
+import EditSpot from "./components/editSpot/editSpot";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
+import CreateReview from "./components/CreateReview/CreateReview";
+import ReviewDetails from "./components/ReviewDetails/ReviewDetails"
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +23,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path = "/spots/:spotId/review/:reviewId">
+            <ReviewDetails/>
+          </Route>
+          <Route exact path = "/spots/:spotId/create">
+            <CreateReview/>
+          </Route>
           <Route path = "/spots/:spotId">
             <SpotDetails/>
           </Route>
@@ -31,6 +40,9 @@ function App() {
           </Route>
           <Route path = "/create" exact>
             <CreateSpot/>
+          </Route>
+          <Route path = "/edit/:spotId">
+            <EditSpot/>
           </Route>
         </Switch>
       )}
