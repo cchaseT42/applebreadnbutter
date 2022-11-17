@@ -5,20 +5,26 @@ import { destroySpot, getOneSpot } from '../../store/spots';
 
 function SpotDetails() {
 
-  const history = useHistory()
   const dispatch = useDispatch();
-  const { spotId } = useParams()
-  const spots = useSelector(state => state.spots)
-  const spot = Object.values(spots).find(spot => spot.id == spotId)
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
+    console.log('dispatched get one spot')
   }, [dispatch])
+
+  const history = useHistory()
+  const { spotId } = useParams()
+  const spot = useSelector(state => state.spots[spotId])
+  console.log('spots from spotDetail', spot)
+  if (!spot?.SpotImages) return null
+
+
+
 
   return (
     <div className="spotDetails">
       <h2>{spot.name}</h2>
-      <img src={''} alt='image'/>
+      <img src={spot.SpotImages[0].url} alt='image'/>
       <h3>{spot.address}, {spot.city}, {spot.state}, {spot.avgRating}</h3>
       <h3>{spot.country}</h3>
       <h3>{spot.price}</h3>
