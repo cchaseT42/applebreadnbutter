@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getSpots } from '../../store/spots';
+import { getSpots, reset} from '../../store/spots';
 import './SpotsPreview.css'
 
 
@@ -15,6 +15,7 @@ function PreviewAllSpots(){
 
   useEffect(() => {
     dispatch(getSpots());
+    // return () => dispatch(reset())
   }, [dispatch])
 
 

@@ -4,6 +4,7 @@ const LOAD = 'spots/getSpots'
 const CREATE = 'spots/createSpot'
 const DELETE = 'spots/deleteSpot'
 const GET_ONE = 'spots/getOne'
+const RESET = 'spots/reset'
 ////////////////////////////////////////////////////
 const load = (spots) => {
   return {
@@ -34,6 +35,13 @@ const getOne = (spot) => {
 }
 
 ///////////////////////////////////////////////////////
+
+export const reset = () => {
+  return {
+    type: RESET,
+  }
+}
+//////////////////////////////////////////////////////
 export const getSpots = () => async dispatch => {
   const response = await fetch(`/api/spots`)
 
@@ -103,6 +111,9 @@ const spotsReducer = (state = initialState, action) => {
     case GET_ONE: {
       const newState = {[action.spot.id]: action.spot}
       return newState
+  }
+    case RESET: {
+      return initialState
   }
 
     default: return state;
