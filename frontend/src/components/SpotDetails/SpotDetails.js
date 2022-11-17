@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
+import SpotReviews from '../SpotReviews/SpotReviews';
 
 function SpotDetails() {
 
@@ -22,6 +23,11 @@ function SpotDetails() {
     await history.push('/')
   }
 
+  const reroute = async (e) => {
+    e.preventDefault();
+    await history.push(`/spots/${spotId}/create`)
+  }
+
   const updateSpot = async (e) => {
     e.preventDefault();
     await history.push(`/edit/${spotId}`)
@@ -40,6 +46,10 @@ function SpotDetails() {
       <p>{spot.description}</p>
       <button onClick={deleteSpot}>Delete Spot</button>
       <button onClick={updateSpot}>Edit Spot</button>
+      <button onClick={reroute}>Leave Review</button>
+      <div>
+      <SpotReviews/>
+      </div>
     </div>
   )
 }

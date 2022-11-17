@@ -92,7 +92,7 @@ export const getOneSpot = (spotId) => async dispatch => {
 
   if (response.ok) {
     const spot = await response.json()
-    console.log('spot returned from database:', spot)
+    //console.log('spot returned from database:', spot)
     dispatch(getOne(spot))
     return
   }
