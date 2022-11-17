@@ -83,12 +83,9 @@ export const destroySpot = (spotId) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'delete'
   })
-
-  if (response.ok) {
-    const spots = await fetch(`/api/spots`)
-    const updatedSpots = await spots.json()
-    dispatch(load(updatedSpots))
-  }
+    if (response.ok){
+    dispatch(destroy(spotId))
+    }
 }
 
 ////////////////////////////////////////////////////
@@ -115,6 +112,11 @@ const spotsReducer = (state = initialState, action) => {
     case RESET: {
       return initialState
   }
+    case DELETE: {
+      const newState = {...state}
+      delete newState[action.spotId];
+      return newState
+    }
 
     default: return state;
   }

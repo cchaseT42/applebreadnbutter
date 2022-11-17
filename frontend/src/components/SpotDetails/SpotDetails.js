@@ -9,14 +9,18 @@ function SpotDetails() {
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
-    console.log('dispatched get one spot')
   }, [dispatch])
 
   const history = useHistory()
   const { spotId } = useParams()
   const spot = useSelector(state => state.spots[spotId])
-  console.log('spots from spotDetail', spot)
   if (!spot?.SpotImages) return null
+
+  const deleteSpot = async (e) => {
+    e.preventDefault();
+    await dispatch(destroySpot(spotId))
+    await history.push('/')
+  }
 
 
 
@@ -29,7 +33,7 @@ function SpotDetails() {
       <h3>{spot.country}</h3>
       <h3>{spot.price}</h3>
       <p>{spot.description}</p>
-      <button id='delete' type ='submit'>Delete Spot</button>
+      <button onClick={deleteSpot}>Delete Spot</button>
     </div>
   )
 }
