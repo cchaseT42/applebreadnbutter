@@ -7,6 +7,7 @@ import * as sessionActions from "../../store/session";
 function SignupFormPage({setShowModal}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  //USE THIS FOR CONDITIONAL RENDERING ^^^^^
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,10 @@ function SignupFormPage({setShowModal}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // const error = []
+    // if (username)
+    // if (password)
+    // if (!email.includes("@"))
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password }))

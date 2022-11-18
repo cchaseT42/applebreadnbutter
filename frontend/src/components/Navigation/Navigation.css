@@ -7,6 +7,13 @@
   border-bottom-color: rgb(199,197,197);
 }
 
+.profile-dropdown {
+  position: absolute;
+  background-color: rgb(252, 254, 254);
+  right: 60px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 .logo {
   position: relative;
   width: 300px;
@@ -18,6 +25,11 @@
   grid-area: nav;
   list-style: none;
   justify-self: right;
+}
+
+.button {
+  position: relative;
+  bottom: 40px;
 }
 
 .checkListings {
@@ -32,11 +44,22 @@
   bottom: 30px;
 }
 
-.button {
+#button {
+  background: transparent;
+  background-color: white;
   position: relative;
-  margin-right: 150px;
-  bottom: 30px;
-  border-radius: 30%;
+  bottom: 1px;
+  width: 60px;
+  height: 40px;
+  margin-right: 120px;
+  border-radius: 21px;
+  border: 1px solid;
+  border-color: #dddddd;
+}
+
+#button:hover {
+box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+transition-duration: 0.2s;
 }
 
 a {

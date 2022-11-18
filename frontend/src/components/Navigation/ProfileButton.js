@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import './Navigation.css';
 
 function ProfileButton({ user, setLogin, setShowModal }) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button id = "button" onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (user ?
