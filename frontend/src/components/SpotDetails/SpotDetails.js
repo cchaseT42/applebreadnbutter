@@ -6,6 +6,8 @@ import SpotReviews from '../SpotReviews/SpotReviews';
 
 function SpotDetails() {
 
+  let isOwner
+  const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,6 +35,12 @@ function SpotDetails() {
     await history.push(`/edit/${spotId}`)
   }
 
+  if (sessionUser)(
+  isOwner = sessionUser.id === spot.ownerId
+  )
+  const isLoggedIn = sessionUser
+  console.log(sessionUser)
+
 
 
 
@@ -44,9 +52,11 @@ function SpotDetails() {
       <h3>{spot.country}</h3>
       <h3>{spot.price}</h3>
       <p>{spot.description}</p>
-      <button onClick={deleteSpot}>Delete Spot</button>
-      <button onClick={updateSpot}>Edit Spot</button>
-      <button onClick={reroute}>Leave Review</button>
+      <div>
+      {isOwner ? <button onClick={deleteSpot}>Delete Spot</button> : <></> }
+      {isOwner ? <button onClick={updateSpot}>Edit Spot</button> : <></>}
+      {(isLoggedIn && !isOwner) ? <button onClick={reroute}>Leave Review</button> : <></>}
+      </div>
       <div>
       <SpotReviews/>
       </div>

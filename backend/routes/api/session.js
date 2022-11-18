@@ -51,7 +51,7 @@ router.delete(
 router.get('/', restoreUser,  async (req, res) => {
 
   if (!req.user){
-    return res.json({"user": "null"})
+    return res.json({"user": null})
   }
     const { user } = req;
     if (user) {
@@ -108,7 +108,6 @@ router.post(
       })
     }
 
-    //console.log(user.id)
     const newUser = await User.findByPk(user.id, {
       attributes: ['id', 'firstName', 'lastName', 'email', 'username']
     })

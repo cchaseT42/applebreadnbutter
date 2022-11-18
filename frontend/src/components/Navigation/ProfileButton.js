@@ -13,6 +13,8 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     setShowMenu(true);
   };
 
+  console.log("user:", user)
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -50,6 +52,12 @@ function ProfileButton({ user, setLogin, setShowModal }) {
               setShowModal(true)
             }}>
               Sign up
+            </button>
+            <button onClick={() => {
+              setLogin(true)
+              setShowModal(true)
+            }}>
+              Log In
             </button>
           </li>
         </ul>)

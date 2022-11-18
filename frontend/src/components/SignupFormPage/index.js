@@ -13,15 +13,18 @@ function SignupFormPage({setShowModal}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const error = []
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const error = []
-    // if (username)
-    // if (password)
-    // if (!email.includes("@"))
+    if (username === "") error.push("Username is required.")
+    if (username.length < 5) error.push("Username must be at least 5 characters long.")
+    if (password === "") error.push("Password is required")
+    if (!email.includes("@")) error.push("Email must be a valid email.")
+    if (password !== confirmPassword) error.push('Confirm Password field must be the same as the Password field')
+    if (error.length) return setErrors(error)
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, password }))
@@ -31,12 +34,12 @@ function SignupFormPage({setShowModal}) {
           if (data && data.errors) setErrors(data.errors);
         });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <ul>
+        {error.map((error, idx) => <li key={idx}>{error}</li>)}
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>

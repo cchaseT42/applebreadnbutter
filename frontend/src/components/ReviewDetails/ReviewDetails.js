@@ -4,8 +4,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { destroyReview, getReviews } from "../../store/reviews";
 
 function ReviewDetails(){
+  const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory()
   const dispatch = useDispatch()
+  let isOwner
   useEffect(() => {
     dispatch(getReviews(spotId))
   }, [dispatch])
@@ -13,14 +15,15 @@ function ReviewDetails(){
   console.log(reviews)
   const { spotId, reviewId } = useParams()
   const review = Object.values(reviews).find(review => {
-    return review.id = reviewId})
-    if (!review?.User) return null
-  console.log(review)
+    return review.id == reviewId})
+    console.log(review)
+  if (!review?.User) return null
+
+  if (sessionUser) isOwner = sessionUser.id === review.userId
 
   const deleteReview = async (e) => {
     e.preventDefault();
     await dispatch(destroyReview(reviewId))
-    // await history.push(`/`)
     await history.push(`/spots/${spotId}`)
   }
 
@@ -29,7 +32,7 @@ function ReviewDetails(){
       <span className="user">{review.User.firstName}, {review.User.lastName}</span>
       <span className='review'>{review.review}</span>
       <span className='stars'>{review.stars}</span>
-      <button onClick={deleteReview}>Delete Review</button>
+      {isOwner ? <button onClick={deleteReview}>Delete Review</button> : <></>}
     </div>
   )
 }
