@@ -28,8 +28,15 @@ function PreviewAllSpots(){
               <Link to={`/spots/${spot.id}`}>
               <img src={spot.previewImage}/>
               </Link>
-              <span className='location'>{spot.city}, {spot.state}</span>
-              <span className='price'>${spot.price} night</span>
+              <div className="row">
+              <h3 className='location'>{spot.city}, {spot.state}</h3>
+              <span className="star">
+                <i class="fa-solid fa-star"></i>
+                {spot.avgRating ? <span className="avgRating">{spot.avgRating}</span>
+                :<span className="avgRating">0</span>}
+              </span>
+              </div>
+              <span className='price'>${spot.price} <span id="night">night</span></span>
             </div>
           )
         })}

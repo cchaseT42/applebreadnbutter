@@ -3,23 +3,44 @@
   padding-right: 80px;
   margin: auto;
   padding-top: 100px;
+  font-family: Montserrat,sans-serif;
 }
 
 .spots {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
 }
 
 .spot {
   display: flex;
   flex-direction: column;
   padding-bottom: 40px;
+  padding: 10px;
 }
 
 .location {
   font-weight: bold;
+}
+
+.star {
+  padding-top: 7%;
+  font-size: 70%;
+}
+
+#night{
+  font-weight: bold;
+}
+.avgRating {
+  font-weight: lighter;
+  font-size: 16px;
 }
 
 img {

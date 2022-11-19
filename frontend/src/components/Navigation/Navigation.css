@@ -4,22 +4,54 @@
   grid-template-areas:
   "logo header navLinks";
   border: solid white;
+  font-family: Montserrat,sans-serif;
   border-bottom-color: rgb(199,197,197);
 }
 
-.profile-drop {
+
+.fa-user-circle {
   position: absolute;
-  background-color: rgb(252, 254, 254);
-  right: 60px;
-  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
-}
-.profile-dropdown {
-  position: absolute;
-  background-color: rgb(252, 254, 254);
-  right: 60px;
-  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+  font-size: 25px;
+  left: 60%;
+  top: 17%;
+  color: rgb(102,111,122);
 }
 
+.fa-bars {
+  position: absolute;
+  top: 23%;
+  font-size: 20px;
+  left: 20%;
+  color: rgb(89,89,89);
+}
+.profile-drop {
+  font-family: Montserrat,sans-serif;
+  position: absolute;
+  background-color: rgb(252, 254, 254);
+  right: 60px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+.profile-dropdown {
+  font-family: Montserrat,sans-serif;
+  position: absolute;
+  background-color: rgb(252, 254, 254);
+  right: 60px;
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+}
+
+.profile-drop > li {
+  position: relative;
+  right: 40%;
+  list-style-type: none;
+}
+
+.profile-dropdown > li {
+  list-style-type: none;
+}
 .logo {
   position: relative;
   width: 300px;
@@ -38,10 +70,18 @@
   bottom: 40px;
 }
 
+.credentials {
+  position: relative;
+  right: 30px;
+}
+
 .checkListings {
   position: relative;
   margin-right: 700px;
   bottom: 30px;
+}
+.checkListings:hover {
+  font-weight: bold;
 }
 
 .becomeHost {
@@ -49,13 +89,16 @@
   margin-right: 400px;
   bottom: 30px;
 }
+.becomeHost:hover {
+  font-weight: bold;
+}
 
 #button {
   background: transparent;
   background-color: white;
   position: relative;
   bottom: 1px;
-  width: 60px;
+  width: 80px;
   height: 40px;
   margin-right: 120px;
   border-radius: 21px;
@@ -66,6 +109,45 @@
 #button:hover {
 box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
 transition-duration: 0.2s;
+}
+
+#signup_button {
+  position: relative;
+  background: none;
+	border: none;
+  border-radius: 30px;
+  padding: 12.5px 0 12.5px 20px;
+}
+
+#signup_button:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+#login_button:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#login_button {
+  position: relative;
+  background: none;
+	color: inherit;
+	border: none;
+  padding: 12.5px 0 12.5px 20px;
+}
+
+#logout {
+  position: relative;
+  right: 50px;
+  background: none;
+	color: inherit;
+	border: none;
+  padding: 12.5px 0 12.5px 20px;
+}
+
+#logout:hover{
+  font-weight: bold;
+  cursor: pointer;
 }
 
 a {

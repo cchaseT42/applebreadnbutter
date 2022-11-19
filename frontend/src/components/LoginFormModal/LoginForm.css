@@ -1,0 +1,59 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  bottom: 100px;
+}
+
+.splashText {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 30px 30px 30px;
+}
+
+.demoUser {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  bottom: 40px;
+}
+
+#DemoUser{
+    background: linear-gradient(90deg,#df1c4d,#de056a);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12pt;
+    font-weight: 600;
+    height: 50px;
+    width: 257px;
+}
+
+.username {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+.password {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+.login {
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 50px;
+  margin-top: 40px;
+  width: 514px;
+}

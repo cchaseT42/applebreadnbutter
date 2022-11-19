@@ -11,6 +11,8 @@ function SignupFormPage({setShowModal}) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setfirstName] = useState("")
+  const [lastName, setlastName] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const error = []
@@ -22,12 +24,13 @@ function SignupFormPage({setShowModal}) {
     if (username === "") error.push("Username is required.")
     if (username.length < 5) error.push("Username must be at least 5 characters long.")
     if (password === "") error.push("Password is required")
+    if (password.length < 4) error.push("Password must be at least four characters.")
     if (!email.includes("@")) error.push("Email must be a valid email.")
     if (password !== confirmPassword) error.push('Confirm Password field must be the same as the Password field')
     if (error.length) return setErrors(error)
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+      return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
       .then(() => setShowModal(false))
         .catch(async (res) => {
           const data = await res.json();
@@ -37,49 +40,66 @@ function SignupFormPage({setShowModal}) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="body">
+    <form className="form" onSubmit={handleSubmit}>
       <ul>
         {error.map((error, idx) => <li key={idx}>{error}</li>)}
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
-        Email
+      <span className="splashText">Welcome!</span>
         <input
+          className="email"
           type="text"
+          placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-      </label>
-      <label>
-        Username
         <input
+          className="username"
           type="text"
+          placeholder='Username'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-      </label>
-      <label>
-        Password
         <input
+          className="firstName"
+          type="text"
+          placeholder='First Name'
+          value={firstName}
+          onChange={(e) => setfirstName(e.target.value)}
+          required
+        />
+        <input
+          className="lastName"
+          type="text"
+          placeholder='Last Name'
+          value={lastName}
+          onChange={(e) => setlastName(e.target.value)}
+          required
+        />
+        <input
+          className="password"
           type="password"
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-      </label>
-      <label>
-        Confirm Password
         <input
+          className="password"
           type="password"
+          placeholder='Confirm Password'
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-      </label>
-      <button type="submit">Sign Up</button>
+        <div className = "signupButtonDiv">
+      <button id="signup" type="submit">Sign Up</button>
+      </div>
     </form>
+    </div>
   );
 }
 
