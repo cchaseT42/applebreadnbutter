@@ -50,7 +50,3 @@ the frontend is running.
 
 
 If you would like to get in contact with me, you can reach me at my email supershoo3@gmail.com
-
-
-
-
