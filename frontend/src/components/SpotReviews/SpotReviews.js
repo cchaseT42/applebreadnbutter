@@ -4,17 +4,22 @@ import { useParams, useHistory } from 'react-router-dom'
 import './SpotReviews.css'
 import { destroyReview, getReviews } from "../../store/reviews";
 function SpotReviews(){
+  let isOwner
   let hasReview = false
   let reviewId
-  let isOwner
   const history = useHistory()
   const dispatch = useDispatch()
   const sessionUser = useSelector((state) => state.session.user);
   const isLoggedIn = sessionUser
   const reviews = useSelector(state => state.reviews)
   const { spotId } = useParams()
+  const spot = useSelector(state => state.spots[spotId])
 
+  if (sessionUser)(
+    isOwner = sessionUser.id === spot.ownerId
+    )
   if (sessionUser){
+  isOwner = sessionUser.id === spot.ownerId
   let review = Object.values(reviews).find(review => review.userId === sessionUser.id)
   if (review) {
     reviewId = review.id

@@ -61,16 +61,16 @@ const handleSubmit = async (e) => {
   await history.push(`/spots/${spotId}`)
 };
 
-useEffect(() => {
-  let errs = []
-  if (name === '') errs.push('Name is required')
-  if (address === '') errs.push('Address is required.')
-  if (city === '') errs.push('City is required.')
-  if (country === '') errs.push('Country is requied.')
-  if (state === '') errs.push ('State is required.')
-  if (description === '') errs.push('Description is required.')
-  if (price === '') errs.push('Price is required.')
-})
+// useEffect(() => {
+//   let errs = []
+//   if (name === '') errs.push('Name is required')
+//   if (address === '') errs.push('Address is required.')
+//   if (city === '') errs.push('City is required.')
+//   if (country === '') errs.push('Country is requied.')
+//   if (state === '') errs.push ('State is required.')
+//   if (description === '') errs.push('Description is required.')
+//   if (price === '') errs.push('Price is required.')
+// })
 
 
   return (

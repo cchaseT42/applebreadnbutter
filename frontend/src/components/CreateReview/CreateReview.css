@@ -1,0 +1,45 @@
+.createReview {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+.createReviewForm{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-left: 500px;
+  padding-right: 500px;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+.errors {
+  font-family: Montserrat,sans-serif;
+  position: relative;
+  margin-right: 40px;
+  color: red;
+  list-style-type: none;
+}
+
+#inputStars {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputReview {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}

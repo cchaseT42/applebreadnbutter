@@ -20,7 +20,8 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/"> Check all listings </NavLink>
       </li>
       <li className='navLinks becomeHost'>
-        <NavLink exact to="/create"> Become a Host </NavLink>
+        {sessionUser ? <NavLink exact to="/create"> Become a Host </NavLink>:<></>}
+
       </li>
       <li className='navLinks button'>
         {isLoaded && (<ProfileButton

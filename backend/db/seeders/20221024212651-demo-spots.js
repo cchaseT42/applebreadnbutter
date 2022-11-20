@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: "address1",
+        address: "1004 New York Avenue",
         city: "New York",
         state: "NY",
         country: "United States",
@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         ownerId: 1,
-        address: "address2",
+        address: "5500 Lost",
         city: "Houston",
         state: "TX",
         country: "United States",
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: "address3",
+        address: "4003 Backyard",
         city: "St. Louis",
         state: "Missouri",
         country: "United States",
@@ -51,7 +51,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: "address4",
+        address: "214 Dandy",
         city: "New York",
         state: "NY",
         country: "United States",
@@ -63,7 +63,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "address5",
+        address: "236 Stun",
         city: "Las Vegas",
         state: "NV",
         country: "United States",
@@ -75,7 +75,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "address6",
+        address: "468 Typhoon",
         city: "Chicago",
         state: "Illinois",
         country: "United States",
@@ -87,7 +87,7 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "address7",
+        address: "624 Tyrant",
         city: "Dallas",
         state: "TX",
         country: "United States",
@@ -99,7 +99,7 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "address8",
+        address: "22 Roman Street",
         city: "Miami",
         state: "FL",
         country: "United States",
@@ -111,7 +111,7 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: "address9",
+        address: "300 County Road",
         city: "Seattle",
         state: "WA",
         country: "United States",
@@ -123,7 +123,7 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: "address10",
+        address: "500 County Road",
         city: "Dallas",
         state: "TX",
         country: "United States",
@@ -135,7 +135,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "address11",
+        address: "200 Main",
         city: "Abilene",
         state: "TX",
         country: "United States",
@@ -147,7 +147,7 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "address12",
+        address: "100 Bright Avenue",
         city: "New York",
         state: "NY",
         country: "United States",

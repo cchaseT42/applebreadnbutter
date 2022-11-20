@@ -12,7 +12,7 @@ function LoginForm({ setShowModal }) {
   const error = []
 
   const demoUser = () => {
-    return dispatch(sessionActions.login({credential:'Demo-lition', password:'password'}))
+    return dispatch(sessionActions.login({credential:'demoman', password:'demoknightTF2'}))
     .then(() => setShowModal(false))
   }
 

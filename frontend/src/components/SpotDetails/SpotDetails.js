@@ -6,6 +6,7 @@ import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
 import './SpotDetails.css'
 
+export let isOwner
 function SpotDetails() {
 
   let isOwner
