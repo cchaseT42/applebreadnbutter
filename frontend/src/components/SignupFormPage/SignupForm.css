@@ -16,6 +16,14 @@
   width: 500px;
 }
 
+.errors {
+  font-family: Montserrat,sans-serif;
+  position: relative;
+  margin-right: 40px;
+  color: red;
+  list-style-type: none;
+}
+
 .firstName {
   height: 50px;
   padding-left: 8px;

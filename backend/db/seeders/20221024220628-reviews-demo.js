@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         spotId: 5,
-        userId: 3,
+        userId: 2,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 3
       },
@@ -50,37 +50,37 @@ module.exports = {
       },
       {
         spotId: 7,
-        userId: 4,
+        userId: 5,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 4
       },
       {
         spotId: 8,
-        userId: 4,
+        userId: 5,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 1
       },
       {
         spotId: 9,
-        userId: 5,
+        userId: 4,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 3
       },
       {
         spotId: 10,
-        userId: 5,
+        userId: 4,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 3
       },
       {
         spotId: 11,
-        userId: 6,
+        userId: 1,
         review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         stars: 2
       },
       {
         spotId: 12,
-        userId: 6,
+        userId: 1,
         review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         stars: 5
       }

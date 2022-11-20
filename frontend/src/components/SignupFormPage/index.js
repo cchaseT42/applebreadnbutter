@@ -42,7 +42,7 @@ function SignupFormPage({setShowModal}) {
   return (
     <div className="body">
     <form className="form" onSubmit={handleSubmit}>
-      <ul>
+      <ul className="errors">
         {error.map((error, idx) => <li key={idx}>{error}</li>)}
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
