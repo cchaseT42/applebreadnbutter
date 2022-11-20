@@ -74,7 +74,6 @@ export const createSpot = (data) => async dispatch => {
 
 ////////////////////////////////////////////////////
 export const editSpot = (data, spotId) => async dispatch => {
-  console.log(data)
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'put',
     headers: {
@@ -93,7 +92,6 @@ export const getOneSpot = (spotId) => async dispatch => {
 
   if (response.ok) {
     const spot = await response.json()
-    //console.log('spot returned from database:', spot)
     dispatch(getOne(spot))
     return
   }

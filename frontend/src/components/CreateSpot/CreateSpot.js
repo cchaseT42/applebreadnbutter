@@ -137,7 +137,7 @@ const handleSubmit = async (e) => {
             </div>
             <div className = "inputDiv">
           <input id="imgInput" placeholder='Image Url'
-            type="text"
+            type="url"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             required

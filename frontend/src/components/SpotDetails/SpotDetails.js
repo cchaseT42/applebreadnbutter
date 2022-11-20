@@ -43,7 +43,6 @@ function SpotDetails() {
   isOwner = sessionUser.id === spot.ownerId
   )
   const isLoggedIn = sessionUser
-  console.log(sessionUser)
 
 
 

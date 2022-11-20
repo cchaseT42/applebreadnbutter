@@ -20,7 +20,6 @@ function LoginForm({ setShowModal }) {
     e.preventDefault();
     setErrors([]);
     const user = await dispatch(sessionActions.login({ credential, password }))
-    console.log('user info:', user)
     if (user == undefined){
       error.push('Credentials did not match an existing user.')
     }

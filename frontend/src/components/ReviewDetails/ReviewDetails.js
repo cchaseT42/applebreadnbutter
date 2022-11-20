@@ -12,11 +12,9 @@ function ReviewDetails(){
     dispatch(getReviews(spotId))
   }, [dispatch])
   const reviews = useSelector(state => state.reviews)
-  console.log(reviews)
   const { spotId, reviewId } = useParams()
   const review = Object.values(reviews).find(review => {
     return review.id == reviewId})
-    console.log(review)
   if (!review?.User) return null
 
   if (sessionUser) isOwner = sessionUser.id === review.userId

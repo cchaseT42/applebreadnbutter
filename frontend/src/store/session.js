@@ -35,7 +35,6 @@ export const login = (user) => async (dispatch) => {
 
   const data = await response.json();
   if (!data.user){
-    console.log('nope!')
     return
   }
   dispatch(setUser(data.user));
@@ -55,11 +54,9 @@ export const signup = (user) => async (dispatch) => {
     }),
   });
   if (!response.ok){
-    console.log("no way!")
     return
   }
   const data = await response.json();
-  console.log(data)
   dispatch(setUser(data.user));
   return response;
 };

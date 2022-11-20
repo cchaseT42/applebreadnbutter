@@ -13,8 +13,6 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     setShowMenu(true);
   };
 
-  console.log("user:", user)
-
   useEffect(() => {
     if (!showMenu) return;
 
