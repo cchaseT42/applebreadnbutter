@@ -51,7 +51,7 @@ function SpotDetails() {
     <div className="spotDetails">
       <h2 className = "SpotName">{spot.name}
        <i className="fa-solid fa-star"></i> {spot.avgStarRating ?
-        <span className="avgRatingSpot">{spot.avgStarRating.toFixed(1)}</span>
+        <span className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</span>
         :<span className="avgRatingSpot">0</span>}</h2>
       <div className="topinfo">
       <h3 className ="location">{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
