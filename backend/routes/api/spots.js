@@ -496,19 +496,35 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 router.put('/:spotId', requireAuth, async (req, res) =>{
   const { user } = req;
   const id = user.id
-  const { address, city, state, country, lat, lng, name, description, price} = req.body
+  let { address, city, state, country, lat, lng, name, description, price} = req.body
 
   let errors = {}
-
-  if (!address || !(typeof address === 'string')) errors.address = "Street address is required."
-  if (!city || !(typeof city === 'string')) errors.city = "City is required."
-  if (!state || !(typeof state === 'string')) errors.state = "State is required."
-  if (!country || !(typeof country === 'string')) errors.country = "Country is required."
-  if (!lat || (Number.isNaN(lat)) || (lat > 90 || lat < -90)) errors.lat = "Latitude is not valid"
-  if (!lng || (Number.isNaN(lng)) || (lng > 180 || lat < -180)) errors.lat = "Longitude is not valid"
-  if (!name || !(typeof name === 'string') || (name.length > 50)) errors.name = "Name must be less than 50 characters"
-  if (!description || !(typeof description === 'string')) errors.description = "Description is required."
-  if (!price || (Number.isNaN(price))) errors.lat = "Price per day is required"
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (!spot){
+    const err = new Error('Search failed');
+    err.message = "Spot couldn't be found.";
+    res.statusCode = '404';
+    return res.json({
+      message: err.message,
+      statusCode: 404
+    })
+}
+  if (!address || (address === '')) address = spot.address
+  if (!state || (state === '')) state = spot.state
+  if (!city || (city === '')) city = spot.city
+  if (!country || (country === '')) country = spot.country
+  if (!price || (price === '')) price = spot.price
+  if (!description || (description === '')) description = spot.description
+  if (!name || (name === '')) name = spot.name
+  //if (address && !(typeof address === 'string')) errors.address = "Street address is required."
+  // if (!city || !(typeof city === 'string')) errors.city = "City is required."
+  // if (!state || !(typeof state === 'string')) errors.state = "State is required."
+  // if (!country || !(typeof country === 'string')) errors.country = "Country is required."
+  // if (!lat || (Number.isNaN(lat)) || (lat > 90 || lat < -90)) errors.lat = "Latitude is not valid"
+  // if (!lng || (Number.isNaN(lng)) || (lng > 180 || lat < -180)) errors.lat = "Longitude is not valid"
+  // if (!name || !(typeof name === 'string') || (name.length > 50)) errors.name = "Name must be less than 50 characters"
+  // if (!description || !(typeof description === 'string')) errors.description = "Description is required."
+  // if (!price || (Number.isNaN(price))) errors.lat = "Price per day is required"
 
 
 
@@ -526,16 +542,6 @@ router.put('/:spotId', requireAuth, async (req, res) =>{
       })
     }
 
-  let spot = await Spot.findByPk(req.params.spotId)
-  if (!spot){
-    const err = new Error('Search failed');
-    err.message = "Spot couldn't be found.";
-    res.statusCode = '404';
-    return res.json({
-      message: err.message,
-      statusCode: 404
-    })
-}
   if (spot.ownerId !== id){
     //console.log(spot.ownerId, id)
     const err = new Error('Search failed');
