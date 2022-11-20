@@ -14,12 +14,13 @@ function SpotReviews(){
   const reviews = useSelector(state => state.reviews)
   const { spotId } = useParams()
 
-
+  if (sessionUser){
   let review = Object.values(reviews).find(review => review.userId === sessionUser.id)
   if (review) {
     reviewId = review.id
     hasReview = true
   }
+}
 
   const deleteReview = async (e) => {
     e.preventDefault();
