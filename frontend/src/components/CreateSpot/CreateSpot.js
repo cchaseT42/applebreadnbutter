@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { createSpot } from '../../store/spots'
 import { Modal } from '../../context/Modal';
 import { addImage } from '../../store/images'
+import './createSpot.css'
 
 
 
@@ -22,6 +23,19 @@ let history = useHistory()
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+  let errs = []
+  if (name === '') errs.push('Name is required')
+  if (address === '') errs.push('Address is required.')
+  if (city === '') errs.push('City is required.')
+  if (country === '') errs.push('Country is requied.')
+  if (state === '') errs.push ('State is required.')
+  if (description === '') errs.push('Description is required.')
+  if (price === '') errs.push('Price is required.')
+  if (isNaN(price)) errs.push("Price must be a number")
+
+  if (errs.length) return setErrors(errs)
+
   const payload = {
     address,
     city,
@@ -61,76 +75,76 @@ useEffect(() => {
 
   return (
     <div className = "createSpot">
-      <form onSubmit = {handleSubmit}>
-        <ul>
+      <form className = "createForm" onSubmit = {handleSubmit}>
+        <ul className = "errors">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <div className = "inputDiv">
           <input id="inputName" placeholder='Name'
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+        <div className = "inputDiv">
           <input id="inputAddress" placeholder='Address'
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+          <div className = "inputDiv">
           <input id="inputCity" placeholder='City'
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+            <div className = "inputDiv">
           <input id="inputState" placeholder='State'
             type="text"
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+            <div className = "inputDiv">
           <input id="inputCountry" placeholder='Country'
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+            <div className = "inputDiv">
           <input id="inputDescription" placeholder='Description'
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+            <div className = "inputDiv">
           <input id="inputPrice" placeholder='Price'
             type="integer"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
             />
-        </label>
-        <label>
+            </div>
+            <div className = "inputDiv">
           <input id="imgInput" placeholder='Image Url'
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             required
             />
-        </label>
+            </div>
         <div>
-          <button id="create" type="submit">Submit</button>
+          <button id="create" type="submit">Create</button>
         </div>
       </form>
     </div>

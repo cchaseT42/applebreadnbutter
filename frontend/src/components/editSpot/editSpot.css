@@ -1,0 +1,88 @@
+.editSpot {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+.editForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-left: 500px;
+  padding-right: 500px;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+#update {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputName {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputAddress {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputCity {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputState {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputCountry {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputPrice {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputDescription {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+#imgInput {
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#update {
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 50px;
+  width: 257px;
+}

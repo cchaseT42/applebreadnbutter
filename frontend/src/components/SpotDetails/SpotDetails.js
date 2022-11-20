@@ -4,13 +4,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
+import './SpotDetails.css'
 
 function SpotDetails() {
 
-  console.log("has review:", hasReview)
   let isOwner
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
@@ -39,7 +40,6 @@ function SpotDetails() {
 
   if (sessionUser)(
   isOwner = sessionUser.id === spot.ownerId
-
   )
   const isLoggedIn = sessionUser
   console.log(sessionUser)
@@ -49,17 +49,26 @@ function SpotDetails() {
 
   return (
     <div className="spotDetails">
-      <h2>{spot.name}, {spot.avgStarRating}</h2>
-      <img src={spot.SpotImages[0].url} alt='image'/>
-      <h3>{spot.address}, {spot.city}, {spot.state}, {spot.avgRating}</h3>
-      <h3>{spot.country}</h3>
-      <h3>{spot.price}</h3>
-      <p>{spot.description}</p>
-      <div>
-      {isOwner ? <button onClick={deleteSpot}>Delete Spot</button> : <></> }
-      {isOwner ? <button onClick={updateSpot}>Edit Spot</button> : <></>}
-      {((!hasReview) && isLoggedIn && (!isOwner)) ? <button onClick={reroute}>Leave Review</button> : <></>}
+      <h2 className = "SpotName">{spot.name}
+       <i className="fa-solid fa-star"></i> {spot.avgStarRating ?
+        <span className="avgRatingSpot">{spot.avgStarRating.toFixed(1)}</span>
+        :<span className="avgRatingSpot">0</span>}</h2>
+      <div className="topinfo">
+      <h3 className ="location">{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
+      <div className = "OwnerButtons">
+      {isOwner ? <button id = "DeleteSpotButton" onClick={deleteSpot}>Delete listing</button> : <></> }
+      {isOwner ? <button id = "UpdateSpotButton" onClick={updateSpot}>Update Information</button> : <></>}
       </div>
+      </div>
+      <img className= "SpotImage" src={spot.SpotImages[0].url} alt='image'/>
+      <h3 className = "ownerName">Hosted by {spot.Owner.firstName}</h3>
+      <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3>
+      <div className = "description">
+      <p>{spot.description}</p>
+      </div>
+      {/* <div className = "buttons">
+      {(isLoggedIn && ((!isOwner) && (!hasReview))) ? <button id="LeaveReviewButton" onClick={reroute}>Leave Review</button> : <></>}
+      </div> */}
       <div>
       <SpotReviews/>
       </div>

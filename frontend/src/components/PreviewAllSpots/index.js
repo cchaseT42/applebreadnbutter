@@ -32,7 +32,7 @@ function PreviewAllSpots(){
               <h3 className='location'>{spot.city}, {spot.state}</h3>
               <span className="star">
                 <i class="fa-solid fa-star"></i>
-                {spot.avgRating ? <span className="avgRating">{spot.avgRating}</span>
+                {spot.avgRating ? <span className="avgRating">{spot.avgRating.toFixed(1)}</span>
                 :<span className="avgRating">0</span>}
               </span>
               </div>

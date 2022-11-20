@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal/LoginFormModal'
 import LoginForm from '../LoginFormModal/LoginForm';
 import { Modal } from '../../context/Modal'
 import SignupFormPage from '../SignupFormPage'
@@ -18,10 +17,10 @@ function Navigation({ isLoaded }){
     <ul className='nav'>
       <img className='logo' src={logo}/>
       <li className='navLinks checkListings'>
-        <NavLink exact to="/">Check all listings</NavLink>
+        <NavLink exact to="/"> Check all listings </NavLink>
       </li>
       <li className='navLinks becomeHost'>
-        <NavLink exact to="/create">Become a Host</NavLink>
+        <NavLink exact to="/create"> Become a Host </NavLink>
       </li>
       <li className='navLinks button'>
         {isLoaded && (<ProfileButton

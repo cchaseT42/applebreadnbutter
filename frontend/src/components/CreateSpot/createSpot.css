@@ -1,0 +1,109 @@
+.createSpot {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+.createForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-left: 500px;
+  padding-right: 500px;
+  top: 30px;
+  margin: auto;
+  max-width: auto;
+}
+
+.errors {
+  font-family: Montserrat,sans-serif;
+  position: relative;
+  margin-right: 40px;
+  color: red;
+  list-style-type: none;
+}
+
+#update {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputName {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputAddress {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputCity {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputState {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputCountry {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputPrice {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+#inputDescription {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+#imgInput {
+  border-radius: 5px;
+  height: 50px;
+  padding-left: 8px;
+  width: 500px;
+}
+
+.inputDiv {
+  padding-bottom: 10px;
+}
+
+#create {
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 50px;
+  width: 257px;
+}

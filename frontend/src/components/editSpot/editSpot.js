@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { editSpot } from '../../store/spots';
+import './editSpot.css'
 
 const EditSpot = () => {
 const dispatch = useDispatch();
@@ -19,6 +20,10 @@ const { spotId } = useParams()
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  let error = []
+  if (isNaN(price)) error.push("Price must be a number")
+
+  if (error.length) return setErrors(error)
   const payload = {
     address,
     city,
@@ -37,77 +42,69 @@ const handleSubmit = async (e) => {
 
 
   return (
-  <div className = "createSpot">
-    <form onSubmit = {handleSubmit}>
+  <div className = "editSpot">
+    <form className = "editForm" onSubmit = {handleSubmit}>
       <ul>
       {errors.map((error, idx) => <li key={idx}>{error}</li>)}
      </ul>
-    <label>
+     <div className = "inputDiv">
       <input id="inputName" placeholder='Name'
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputAddress" placeholder='Address'
         type="text"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputCity" placeholder='City'
         type="text"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputState" placeholder='State'
         type="text"
         value={state}
         onChange={(e) => setState(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputCountry" placeholder='Country'
         type="text"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputDescription" placeholder='Description'
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="inputPrice" placeholder='Price'
         type="integer"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
-        required
         />
-    </label>
-    <label>
+        </div>
+        <div className = "inputDiv">
       <input id="imgInput" placeholder='Image Url'
-        type="text"
+        type="url"
         value={image}
         onChange={(e) => setImage(e.target.value)}
-        required
         />
-    </label>
+        </div>
     <div>
-      <button id="create" type="submit">Submit</button>
+      <button id="update" type="submit">Update</button>
     </div>
   </form>
 </div>)

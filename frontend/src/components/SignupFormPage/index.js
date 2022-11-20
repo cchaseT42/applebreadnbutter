@@ -22,7 +22,7 @@ function SignupFormPage({setShowModal}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === "") error.push("Username is required.")
-    if (username.length < 5) error.push("Username must be at least 5 characters long.")
+    if (username.length < 4) error.push("Username must be at least four characters long.")
     if (password === "") error.push("Password is required")
     if (password.length < 4) error.push("Password must be at least four characters.")
     if (!email.includes("@")) error.push("Email must be a valid email.")

@@ -28,29 +28,29 @@
   font-family: Montserrat,sans-serif;
   position: absolute;
   background-color: rgb(252, 254, 254);
-  right: 60px;
+  width: auto;
+  border-radius: 15px;
   box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
+  list-style: none;
 }
 .profile-dropdown {
   font-family: Montserrat,sans-serif;
   position: absolute;
   background-color: rgb(252, 254, 254);
-  right: 60px;
   width: auto;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
-  list-style-type: none;
+  list-style: none;
 }
 
 .profile-drop > li {
-  position: relative;
-  right: 40%;
-  list-style-type: none;
+  /* position: relative;
+  right: 40%; */
+  list-style: none;
 }
 
 .profile-dropdown > li {
-  list-style-type: none;
+  list-style: none;
 }
 .logo {
   position: relative;
@@ -72,7 +72,6 @@
 
 .credentials {
   position: relative;
-  right: 30px;
 }
 
 .checkListings {
@@ -80,17 +79,11 @@
   margin-right: 700px;
   bottom: 30px;
 }
-.checkListings:hover {
-  font-weight: bold;
-}
 
 .becomeHost {
   position: relative;
   margin-right: 400px;
   bottom: 30px;
-}
-.becomeHost:hover {
-  font-weight: bold;
 }
 
 #button {
@@ -115,16 +108,18 @@ transition-duration: 0.2s;
   position: relative;
   background: none;
 	border: none;
-  border-radius: 30px;
+  width: 110%;
+  right: 10px;
+  border-radius: 15px;
   padding: 12.5px 0 12.5px 20px;
 }
 
 #signup_button:hover{
-  font-weight: bold;
+  background-color: rgb(209, 207, 207);
   cursor: pointer;
 }
 #login_button:hover{
-  font-weight: bold;
+  background-color: rgb(209, 207, 207);;
   cursor: pointer;
 }
 
@@ -133,24 +128,45 @@ transition-duration: 0.2s;
   background: none;
 	color: inherit;
 	border: none;
+  width: 110%;
+  right: 10px;
+  border-radius: 15px;
   padding: 12.5px 0 12.5px 20px;
 }
 
+#logoutText {
+  padding-left: 10px;;
+}
 #logout {
-  position: relative;
-  right: 50px;
-  background: none;
-	color: inherit;
-	border: none;
-  padding: 12.5px 0 12.5px 20px;
+  width: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-
 #logout:hover{
-  font-weight: bold;
+  background-color: rgb(209, 207, 207);
   cursor: pointer;
 }
 
+#loggedInInfo{
+  position: relative;
+  right: 30px;
+  padding-right: 20px;
+  width: 110%;
+  padding-top: 10px;
+}
+#LoginSignup {
+  position: relative;
+  right: 30px;
+  padding-right: 20px;
+  width: 110%;
+  padding-top: 10px;
+}
+
 a {
+  border-radius: 15px;
  color: black;
  text-decoration: none;
+}
+a:hover {
+  background-color: rgb(209, 207, 207);
 }

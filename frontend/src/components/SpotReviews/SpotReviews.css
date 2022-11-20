@@ -1,0 +1,43 @@
+.reviews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 800px;
+  margin: auto;
+  padding-top: 50px;
+  font-family: Montserrat,sans-serif;
+}
+
+.reviewBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 300px;
+  max-height: 100px;
+  margin: auto;
+  border-style: solid;
+  border-color: transparent;
+  padding-bottom: 18px;
+  overflow-y: hidden;
+}
+
+.userReview {
+  font-size: 22px;
+}
+
+.reviewStar {
+  font-size: 18px;
+}
+
+#DeleteReviewButton {
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 50px;
+  width: 200px;
+}
