@@ -12,6 +12,14 @@
   padding: 30px 30px 30px;
 }
 
+.errors {
+  font-family: Montserrat,sans-serif;
+  position: relative;
+  margin-right: 40px;
+  color: red;
+  list-style-type: none;
+}
+
 .demoUser {
   display: flex;
   justify-content: center;
