@@ -22,7 +22,7 @@ module.exports = {
         lat: 38.8977,
         lng: 77.0365,
         name: 'Small home',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 650
       },
       {
@@ -34,7 +34,7 @@ module.exports = {
         lat: 39.8977,
         lng: 79.0365,
         name: 'Small home',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 1000
       },
       {
@@ -46,7 +46,7 @@ module.exports = {
         lat: 37.2431,
         lng: 115.7930,
         name: 'Large home',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 100
       },
       {
@@ -58,7 +58,7 @@ module.exports = {
         lat: 36.2431,
         lng: 116.7930,
         name: 'Penthouse',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 100
       },
       {
@@ -70,7 +70,7 @@ module.exports = {
         lat: 30.0988,
         lng: 110.4353,
         name: "Penthouse",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 230
       },
       {
@@ -82,7 +82,7 @@ module.exports = {
         lat: 38.0988,
         lng: 118.4353,
         name: "Small house",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 200
       },
       {
@@ -94,7 +94,7 @@ module.exports = {
         lat: 31.0688,
         lng: 130.4353,
         name: "Condominium",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 210
       },
       {
@@ -106,7 +106,7 @@ module.exports = {
         lat: 30.0688,
         lng: 130.4443,
         name: "Small house",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 150
       },
       {
@@ -118,7 +118,7 @@ module.exports = {
         lat: 40.0388,
         lng: 120.4353,
         name: "Large house",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 200
       },
       {
@@ -130,7 +130,7 @@ module.exports = {
         lat: 39.0388,
         lng: 78.4353,
         name: "Large home",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 1000
       },
       {
@@ -142,7 +142,7 @@ module.exports = {
         lat: 32.0988,
         lng: 111.4353,
         name: "Large home",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 200
       },
       {
@@ -154,7 +154,7 @@ module.exports = {
         lat: 39.088,
         lng: 117.41353,
         name: "Condominium",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         price: 200
       },
     ])
