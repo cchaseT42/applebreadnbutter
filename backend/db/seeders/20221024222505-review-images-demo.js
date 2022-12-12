@@ -1,5 +1,13 @@
 'use strict';
 
+let options = {}
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
+options.tableName = 'ReviewImages'
+
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -12,7 +20,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('ReviewImages', [
+   await queryInterface.bulkInsert(options, [
     {
       reviewId: 1,
       url: "imgurl1.com"
@@ -48,6 +56,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('ReviewImages')
+    await queryInterface.bulkDelete(options)
   }
 };

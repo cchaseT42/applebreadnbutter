@@ -1,5 +1,12 @@
 'use strict';
 
+let options = {}
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
+options.tableName = 'Reviews'
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,7 +18,7 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */await queryInterface.bulkInsert('Reviews', [
+    */await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
         userId: 2,
@@ -96,6 +103,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-      await queryInterface.bulkDelete('Reviews')
+      await queryInterface.bulkDelete(options)
   }
 };
