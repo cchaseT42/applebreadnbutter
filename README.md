@@ -14,7 +14,7 @@ redux
 
 Local database is sequelize, live is postgres
 
-Hosted with Heroku.
+Hosted with Render.
 
 
 ## Landing Page
