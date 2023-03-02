@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
-import { getSpotBookings, createBooking, getBookings } from '../../store/bookings';
+import { getSpotBookings, createBooking, deleteBooking } from '../../store/bookings';
 import { Calendar, DatePicker } from 'react-widgets';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
@@ -16,13 +16,14 @@ function SpotDetails() {
   let isOwner
   const sessionUser = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings)
-  console.log(bookings)
+  console.log(Object.values(bookings))
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date())
   const week = new Date()
   week.setDate(new Date().getDate() + 7)
   const [endDate, setEndDate] = useState(week)
   let hasBooking = false
+  let ownedBookingId
 
   let daysmili = endDate.getTime() - startDate.getTime()
   let days = Math.ceil(daysmili / (1000 * 3600 * 24))
@@ -35,12 +36,14 @@ function SpotDetails() {
   }, [dispatch])
 
   if (bookings){
-  bookings[0].forEach(ele => {
+ Object.values(bookings).forEach(ele => {
     let currDate = new Date()
     //checks to see if user has a booking,
     //and the dates of the booking have not passed yet.
-    if (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate)){
+    if (ele.userId == sessionUser.id && (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate))){
       hasBooking = true
+      ownedBookingId = ele.id
+      console.log(ownedBookingId)
     }
   })
 }
@@ -69,8 +72,9 @@ function SpotDetails() {
   }
 
   const newBooking = async (e) => {
+    let currDate = new Date()
 
-
+    if(currDate > startDate) return
 
     const payload = {
       spotId: Number(spotId),
@@ -80,7 +84,13 @@ function SpotDetails() {
     }
 
     let createdBooking = await dispatch(createBooking(payload, spotId))
-    await dispatch(getBookings)
+    await dispatch(getSpotBookings(spotId))
+  }
+
+  const destroyBooking = async (e) => {
+    e.preventDefault()
+    await dispatch(deleteBooking(ownedBookingId))
+    await dispatch(getSpotBookings(spotId))
   }
 
   if (sessionUser)(
@@ -112,6 +122,7 @@ function SpotDetails() {
       </div>
       <div className="lower_div">
       <SpotReviews/>
+      {!hasBooking &&
       <div className="createBookingDiv">
         <DatePicker
         defaultValue={startDate}
@@ -127,14 +138,18 @@ function SpotDetails() {
           <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
         </div>
-        <div>
-          {hasBooking && <p>You have booked this spot</p>}
-        </div>
         <div className="totals">
         <p>${spot.price} X {days} nights</p>
         <p>${spot.price * days}</p>
         </div>
-      </div>
+        </div>
+        }
+          {hasBooking &&
+          <div className="createBookingDiv">
+          <p>You have booked this spot</p>
+          <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
+          </div>
+          }
       </div>
     </div>
   )

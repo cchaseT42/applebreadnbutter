@@ -68,7 +68,6 @@ export const getSpotBookings = (spotId) => async dispatch => {
 
   if (response.ok) {
     const bookings = await response.json()
-    console.log("getSpotBookings: ", bookings)
     dispatch(spotLoad(bookings));
   }
 }
@@ -77,7 +76,7 @@ export const getSpotBookings = (spotId) => async dispatch => {
 
 export const deleteBooking = (bookingId) => async dispatch => {
   const response = await csrfFetch(`/api/bookings/${bookingId}`, {
-    methold: 'delete'
+    method: 'delete'
   })
     if (response.ok){
       dispatch(destroy(bookingId))
@@ -128,8 +127,11 @@ const bookingsReducer = (state = initialState, action) => {
       return newState
     }
     case SPOTLOAD: {
-      let newState = []
-      newState = [Object.values(action.bookings)[0]]
+      let newState = {}
+      let bookings = Object.values(action.bookings)
+      bookings[0].forEach(booking => {
+        newState[booking.id] = booking
+      })
       return newState
     }
     case RESET: {
