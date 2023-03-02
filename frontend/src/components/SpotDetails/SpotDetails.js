@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
-import { getSpotBookings } from '../../store/bookings';
+import { getSpotBookings, createBooking, getBookings } from '../../store/bookings';
 import { Calendar, DatePicker } from 'react-widgets';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
@@ -33,6 +33,7 @@ function SpotDetails() {
   }, [dispatch])
 
   console.log(bookings)
+  console.log(startDate)
 
   const history = useHistory()
   const { spotId } = useParams()
@@ -53,6 +54,19 @@ function SpotDetails() {
   const updateSpot = async (e) => {
     e.preventDefault();
     await history.push(`/edit/${spotId}`)
+  }
+
+  const newBooking = async (e) => {
+
+    const payload = {
+      spotId: Number(spotId),
+      userId: sessionUser.id,
+      startDate,
+      endDate
+    }
+
+    let createdBooking = await dispatch(createBooking(payload, spotId))
+    await dispatch(getBookings)
   }
 
   if (sessionUser)(
@@ -87,18 +101,16 @@ function SpotDetails() {
       <div className="createBookingDiv">
         <DatePicker
         defaultValue={startDate}
-        valueFormat={{dateStyle: "medium"}}
         value={startDate}
         onChange={startDate => setStartDate(startDate)}
         />
         <DatePicker
         defaultValue={endDate}
-        valueFormat={{dateStyle: "medium"}}
         value={endDate}
         onChange={endDate => setEndDate(endDate)}
         />
         <div className="reserveButtonDiv">
-          <button id="reserveButton">Reserve</button>
+          <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
         </div>
         <div className="totals">
