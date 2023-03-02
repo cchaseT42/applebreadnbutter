@@ -125,11 +125,13 @@ function SpotDetails() {
       {!hasBooking &&
       <div className="createBookingDiv">
         <DatePicker
+        min={new Date()}
         defaultValue={startDate}
         value={startDate}
         onChange={startDate => setStartDate(startDate)}
         />
         <DatePicker
+        min={new Date()}
         defaultValue={endDate}
         value={endDate}
         onChange={endDate => setEndDate(endDate)}
