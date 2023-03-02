@@ -5,7 +5,7 @@ import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
 import { getSpotBookings } from '../../store/bookings';
-import { Calendar } from 'react-widgets';
+import { Calendar, DatePicker } from 'react-widgets';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
 
@@ -17,10 +17,14 @@ function SpotDetails() {
   const sessionUser = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings)
   const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState(new Date())
+  const week = new Date()
+  week.setDate(new Date().getDate() + 7)
+  const [endDate, setEndDate] = useState(week)
 
-  const [date, setDate] = useState(new Date())
+  let daysmili = endDate.getTime() - startDate.getTime()
+  let days = Math.ceil(daysmili / (1000 * 3600 * 24))
 
-  console.log('date', date)
 
 
   useEffect(() => {
@@ -81,17 +85,25 @@ function SpotDetails() {
       <div className="lower_div">
       <SpotReviews/>
       <div className="createBookingDiv">
-        <Calendar id="calendar"
-        value={date}
-        onChange={date => setDate(date)}
+        <DatePicker
+        defaultValue={startDate}
+        valueFormat={{dateStyle: "medium"}}
+        value={startDate}
+        onChange={startDate => setStartDate(startDate)}
+        />
+        <DatePicker
+        defaultValue={endDate}
+        valueFormat={{dateStyle: "medium"}}
+        value={endDate}
+        onChange={endDate => setEndDate(endDate)}
         />
         <div className="reserveButtonDiv">
           <button id="reserveButton">Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
         </div>
         <div className="totals">
-        <p>${spot.price} X NUMBER nights</p>
-        <p>${spot.price}</p>
+        <p>${spot.price} X {days} nights</p>
+        <p>${spot.price * days}</p>
         </div>
       </div>
       </div>
