@@ -4,19 +4,31 @@ import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
+import { getSpotBookings } from '../../store/bookings';
+import { Calendar } from 'react-widgets';
 import './SpotDetails.css'
+import "react-widgets/styles.css";
+
 
 export let isOwner
 function SpotDetails() {
 
   let isOwner
   const sessionUser = useSelector((state) => state.session.user);
+  const bookings = useSelector((state) => state.bookings)
   const dispatch = useDispatch();
+
+  const [date, setDate] = useState(new Date())
+
+  console.log('date', date)
 
 
   useEffect(() => {
     dispatch(getOneSpot(spotId));
+    dispatch(getSpotBookings(spotId))
   }, [dispatch])
+
+  console.log(bookings)
 
   const history = useHistory()
   const { spotId } = useParams()
@@ -66,11 +78,22 @@ function SpotDetails() {
       <div className = "description">
       <p>{spot.description}</p>
       </div>
-      {/* <div className = "buttons">
-      {(isLoggedIn && ((!isOwner) && (!hasReview))) ? <button id="LeaveReviewButton" onClick={reroute}>Leave Review</button> : <></>}
-      </div> */}
-      <div>
+      <div className="lower_div">
       <SpotReviews/>
+      <div className="createBookingDiv">
+        <Calendar id="calendar"
+        value={date}
+        onChange={date => setDate(date)}
+        />
+        <div className="reserveButtonDiv">
+          <button id="reserveButton">Reserve</button>
+          <p className="reserveP">You won't be charged yet</p>
+        </div>
+        <div className="totals">
+        <p>${spot.price} X NUMBER nights</p>
+        <p>${spot.price}</p>
+        </div>
+      </div>
       </div>
     </div>
   )

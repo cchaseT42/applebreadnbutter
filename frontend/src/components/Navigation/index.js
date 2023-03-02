@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginForm from '../LoginFormModal/LoginForm';
 import { Modal } from '../../context/Modal'
 import SignupFormPage from '../SignupFormPage'
 import './Navigation.css';
-import logo from '../../logo/output-onlinepngtools.png'
+import logo from '../../logo/Screenshot_56.png'
 
 function Navigation({ isLoaded }){
+  const history = useHistory()
   const sessionUser = useSelector(state => state.session.user);
   const [showModal, setShowModal] = useState(false)
   const [login, setLogin] = useState(true)
 
+  const redirect = async () => {
+    await history.push('/')
+  }
+
   return (
     <ul className='nav'>
-      <img className='logo' src={logo}/>
-      <li className='navLinks checkListings'>
-        <NavLink exact to="/"> Check all listings </NavLink>
-      </li>
+      <img className='logo' src={logo} onClick={redirect}>
+      </img>
       <li className='navLinks becomeHost'>
         {sessionUser ? <NavLink exact to="/create"> Become a Host </NavLink>:<></>}
 
