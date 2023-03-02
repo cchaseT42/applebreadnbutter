@@ -16,11 +16,13 @@ function SpotDetails() {
   let isOwner
   const sessionUser = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings)
+  console.log(bookings)
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date())
   const week = new Date()
   week.setDate(new Date().getDate() + 7)
   const [endDate, setEndDate] = useState(week)
+  let hasBooking = false
 
   let daysmili = endDate.getTime() - startDate.getTime()
   let days = Math.ceil(daysmili / (1000 * 3600 * 24))
@@ -32,8 +34,18 @@ function SpotDetails() {
     dispatch(getSpotBookings(spotId))
   }, [dispatch])
 
-  console.log(bookings)
-  console.log(startDate)
+  if (bookings){
+  bookings[0].forEach(ele => {
+    let currDate = new Date()
+    //checks to see if user has a booking,
+    //and the dates of the booking have not passed yet.
+    if (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate)){
+      hasBooking = true
+    }
+  })
+}
+
+  console.log(hasBooking)
 
   const history = useHistory()
   const { spotId } = useParams()
@@ -57,6 +69,8 @@ function SpotDetails() {
   }
 
   const newBooking = async (e) => {
+
+
 
     const payload = {
       spotId: Number(spotId),
@@ -112,6 +126,9 @@ function SpotDetails() {
         <div className="reserveButtonDiv">
           <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
+        </div>
+        <div>
+          {hasBooking && <p>You have booked this spot</p>}
         </div>
         <div className="totals">
         <p>${spot.price} X {days} nights</p>

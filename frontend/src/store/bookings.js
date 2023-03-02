@@ -128,12 +128,8 @@ const bookingsReducer = (state = initialState, action) => {
       return newState
     }
     case SPOTLOAD: {
-      let bookings = Object.values(action.bookings)
-      console.log("Bookings reducer:", bookings)
-      const newState = {}
-      bookings.forEach(booking => {
-        newState[booking.id] = booking
-      });
+      let newState = []
+      newState = [Object.values(action.bookings)[0]]
       return newState
     }
     case RESET: {
