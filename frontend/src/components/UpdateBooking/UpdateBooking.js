@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { DatePicker } from 'react-widgets';
 import { editBooking } from '../../store/bookings'
+import './UpdateBookings.css'
 
 function UpdateBooking({setShowModal, bookingId}) {
 
-  console.log(bookingId)
   const dispatch = useDispatch()
   const spot = useSelector(state => state.spots)
   const sessionUser = useSelector((state) => state.session.user);
@@ -17,7 +17,6 @@ function UpdateBooking({setShowModal, bookingId}) {
     if (ele.userId == sessionUser.id) booking = ele
   })
 
-  console.log(booking)
 
   const [startDate, setStartDate] = useState(new Date(booking.startDate))
   const [endDate, setEndDate] = useState(new Date(booking.endDate))
@@ -36,9 +35,9 @@ function UpdateBooking({setShowModal, bookingId}) {
 
 
   return (
-    <div>
+    <div className="UpdateBooking">
       <div className="editText">
-        <p>Select new starting and end dates</p>
+        <p id="updateText">Select new starting and end dates</p>
       </div>
       <div className="createBookingDiv">
       <DatePicker
@@ -54,7 +53,7 @@ function UpdateBooking({setShowModal, bookingId}) {
         onChange={endDate => setEndDate(endDate)}
         />
       </div>
-      <div>
+      <div className="updateBookingDiv">
         <button id="updateBooking" onClick={editBookingFunc}>Update</button>
       </div>
     </div>

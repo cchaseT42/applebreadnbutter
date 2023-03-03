@@ -1,0 +1,32 @@
+#updateBooking{
+margin-top: 10px;
+background: linear-gradient(90deg, #df1c4d, #de056a);
+border: none;
+border-radius: 7px;
+height: 40px;
+color: white;
+width: 100%;
+font-size: 12pt;
+font-weight: 600;
+}
+
+#updateBooking:hover{
+  cursor: pointer;
+}
+
+.editText{
+  margin-left: 15%;
+  margin-right: 10%;
+}
+
+#updateText{
+  font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+.UpdateBooking{
+
+}
+
+.updateBookingDiv{
+  margin: 10%;
+}
