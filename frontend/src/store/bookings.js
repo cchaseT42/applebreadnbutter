@@ -5,7 +5,6 @@ const SPOTLOAD = 'bookings/getSpotBookings'
 const CREATE = 'bookings/createBooking'
 const DELETE = 'bookings/deleteBooking'
 const UPDATE = 'bookings/update'
-const RESET = 'bookings/reset'
 
 ///////////////////////////////////////////////
 const load = (bookings) => {
@@ -34,12 +33,6 @@ const destroy = (booking) => {
   return {
     type: DELETE,
     booking
-  }
-}
-////////////////////////////////////////////////
-export const reset = () => {
-  return {
-    type: RESET,
   }
 }
 ////////////////////////////////////////////////
@@ -133,9 +126,6 @@ const bookingsReducer = (state = initialState, action) => {
         newState[booking.id] = booking
       })
       return newState
-    }
-    case RESET: {
-      return initialState
     }
     case CREATE: {
       const newState = {...state, [action.booking.id]: action.booking}

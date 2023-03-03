@@ -8,6 +8,7 @@ import { getSpotBookings, createBooking, deleteBooking } from '../../store/booki
 import { Calendar, DatePicker } from 'react-widgets';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
+import UpdateBookingModal from '../UpdateBookingModal';
 
 
 export let isOwner
@@ -150,6 +151,7 @@ function SpotDetails() {
           <div className="createBookingDiv">
           <p>You have booked this spot</p>
           <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
+          <UpdateBookingModal bookingId={ownedBookingId}/>
           </div>
           }
       </div>
