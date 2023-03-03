@@ -19,10 +19,13 @@ function SpotDetails() {
   const bookings = useSelector((state) => state.bookings)
   console.log(Object.values(bookings))
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(new Date())
+  const tomorrow = new Date()
+  tomorrow.setDate(new Date().getDate() + 1)
+  const [startDate, setStartDate] = useState(tomorrow)
   const week = new Date()
   week.setDate(new Date().getDate() + 7)
   const [endDate, setEndDate] = useState(week)
+  const [errors, setErrors] = useState([])
   let hasBooking = false
   let ownedBookingId
 
@@ -49,7 +52,6 @@ function SpotDetails() {
   })
 }
 
-  console.log(hasBooking)
 
   const history = useHistory()
   const { spotId } = useParams()
@@ -75,7 +77,11 @@ function SpotDetails() {
   const newBooking = async (e) => {
     let currDate = new Date()
 
-    if(currDate > startDate) return
+    if (startDate < tomorrow) errors.push("Cannot book before tomorrow.")
+    if (endDate < startDate) errors.push("Cannot book end date before start date.")
+
+    if (errors.length) return setErrors(errors)
+
 
     const payload = {
       spotId: Number(spotId),
@@ -125,14 +131,16 @@ function SpotDetails() {
       <SpotReviews/>
       {!hasBooking &&
       <div className="createBookingDiv">
+        <label className="dateLabel">Start Date</label>
         <DatePicker
-        min={new Date()}
+        min={tomorrow}
         defaultValue={startDate}
         value={startDate}
         onChange={startDate => setStartDate(startDate)}
         />
+        <label className="dateLabel">End Date</label>
         <DatePicker
-        min={new Date()}
+        min={tomorrow}
         defaultValue={endDate}
         value={endDate}
         onChange={endDate => setEndDate(endDate)}

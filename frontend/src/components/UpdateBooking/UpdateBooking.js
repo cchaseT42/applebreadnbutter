@@ -40,12 +40,14 @@ function UpdateBooking({setShowModal, bookingId}) {
         <p id="updateText">Select new starting and end dates</p>
       </div>
       <div className="createBookingDiv">
+        <label className="dateLabel">Start Date</label>
       <DatePicker
         min={new Date()}
         defaultValue={startDate}
         value={startDate}
         onChange={startDate => setStartDate(startDate)}
         />
+        <label className="dateLabel">End Date</label>
         <DatePicker
         min={new Date()}
         defaultValue={endDate}

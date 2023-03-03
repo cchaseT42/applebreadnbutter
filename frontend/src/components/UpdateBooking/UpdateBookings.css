@@ -30,3 +30,7 @@ font-weight: 600;
 .updateBookingDiv{
   margin: 10%;
 }
+
+.dateLabel{
+  margin-top: 10px;
+}
