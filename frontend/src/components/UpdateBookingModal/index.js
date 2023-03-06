@@ -7,7 +7,7 @@ function UpdateBookingModal({bookingId}) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit Booking</button>
+      <button id="reserveButton" onClick={() => setShowModal(true)}>Edit Booking</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <UpdateBooking setShowModal={setShowModal} bookingId={bookingId}/>

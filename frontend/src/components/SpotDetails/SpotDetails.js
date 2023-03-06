@@ -5,7 +5,9 @@ import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import { hasReview } from '../SpotReviews/SpotReviews'
 import { getSpotBookings, createBooking, deleteBooking } from '../../store/bookings';
-import { Calendar, DatePicker } from 'react-widgets';
+import { DatePicker } from 'react-widgets';
+import { format, getDay } from "date-fns";
+import BookingsModal from '../BookingsModal/BookingsModal';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
 import UpdateBookingModal from '../UpdateBookingModal';
@@ -17,7 +19,7 @@ function SpotDetails() {
   let isOwner
   const sessionUser = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings)
-  console.log(Object.values(bookings))
+  const bookingsArr = Object.values(bookings)
   const dispatch = useDispatch();
   const tomorrow = new Date()
   tomorrow.setDate(new Date().getDate() + 1)
@@ -26,9 +28,21 @@ function SpotDetails() {
   week.setDate(new Date().getDate() + 7)
   const [endDate, setEndDate] = useState(week)
   const [errors, setErrors] = useState([])
+  const error = []
   let hasBooking = false
   let ownedBookingId
+  const bookedDatesArr = []
 
+  bookingsArr.forEach(ele => {
+    let booking = []
+    let start = format(new Date(ele.startDate), "MM/dd/yyyy")
+    let end = format(new Date(ele.endDate), "MM/dd/yyyy")
+    booking.push(start)
+    booking.push(end)
+    bookedDatesArr.push(booking)
+  })
+
+  console.log(bookedDatesArr)
   let daysmili = endDate.getTime() - startDate.getTime()
   let days = Math.ceil(daysmili / (1000 * 3600 * 24))
 
@@ -39,7 +53,7 @@ function SpotDetails() {
     dispatch(getSpotBookings(spotId))
   }, [dispatch])
 
-  if (bookings){
+  if (bookings && sessionUser){
  Object.values(bookings).forEach(ele => {
     let currDate = new Date()
     //checks to see if user has a booking,
@@ -75,12 +89,20 @@ function SpotDetails() {
   }
 
   const newBooking = async (e) => {
-    let currDate = new Date()
+    e.preventDefault();
 
-    if (startDate < tomorrow) errors.push("Cannot book before tomorrow.")
-    if (endDate < startDate) errors.push("Cannot book end date before start date.")
+    if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
+    if (endDate < startDate) error.push("Cannot book end date before start date.")
 
-    if (errors.length) return setErrors(errors)
+    Object.values(bookings).forEach(ele => {
+      if ((startDate > new Date(ele.startDate) && startDate < new Date(ele.endDate))
+        || endDate > new Date(ele.startDate) && endDate < new Date(ele.endDate)
+        )
+        return error.push("This spot is already booked for the selected dates.")
+    })
+
+    if (error.length) return setErrors(error)
+    if (!error.length) setErrors([])
 
 
     const payload = {
@@ -129,8 +151,13 @@ function SpotDetails() {
       </div>
       <div className="lower_div">
       <SpotReviews/>
-      {!hasBooking &&
+      {( sessionUser && !hasBooking) &&
       <div className="createBookingDiv">
+        <ul className="errors">
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+        </ul>
         <label className="dateLabel">Start Date</label>
         <DatePicker
         min={tomorrow}
@@ -146,6 +173,7 @@ function SpotDetails() {
         onChange={endDate => setEndDate(endDate)}
         />
         <div className="reserveButtonDiv">
+          <BookingsModal bookedDatesArr={bookedDatesArr}/>
           <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
         </div>
@@ -157,9 +185,11 @@ function SpotDetails() {
         }
           {hasBooking &&
           <div className="createBookingDiv">
-          <p>You have booked this spot</p>
+            <div className="createdBookingDiv">
+          <p id="bookedthis">You have booked this spot</p>
           <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
           <UpdateBookingModal bookingId={ownedBookingId}/>
+          </div>
           </div>
           }
       </div>

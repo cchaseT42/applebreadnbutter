@@ -44,7 +44,6 @@ function SignupFormPage({setShowModal}) {
     <form className="form" onSubmit={handleSubmit}>
       <ul className="errors">
         {error.map((error, idx) => <li key={idx}>{error}</li>)}
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <span className="splashText">Welcome!</span>
         <input
