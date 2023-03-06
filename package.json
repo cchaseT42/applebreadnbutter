@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/supershoo/API-project/issues"
   },
-  "homepage": "https://github.com/supershoo/API-project#readme"
+  "homepage": "https://github.com/supershoo/API-project#readme",
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "react-nice-dates": "^3.1.0"
+  }
 }

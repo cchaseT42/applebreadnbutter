@@ -44,8 +44,6 @@
 }
 
 .profile-drop > li {
-  /* position: relative;
-  right: 40%; */
   list-style: none;
 }
 
@@ -54,9 +52,12 @@
 }
 .logo {
   position: relative;
-  width: 300px;
-  height: 300px;
-  bottom: 119px;
+  height: 87px;
+  width: 470px;
+}
+
+.logo:hover{
+  cursor: pointer;
 }
 
 .navLinks {
