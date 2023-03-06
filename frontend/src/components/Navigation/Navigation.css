@@ -51,9 +51,10 @@
   list-style: none;
 }
 .logo {
-  position: relative;
   height: 87px;
   width: 470px;
+  position: absolute;
+  top: 0px;
 }
 
 .logo:hover{
@@ -85,6 +86,10 @@
   position: relative;
   margin-right: 400px;
   bottom: 30px;
+}
+
+.becomeHost:hover{
+  background-color: rgb(209, 207, 207);
 }
 
 #button {
@@ -148,6 +153,26 @@ transition-duration: 0.2s;
   cursor: pointer;
 }
 
+#socialimg{
+  height:50px;
+  width: 50px;
+}
+
+#socialimg2{
+  position: relative;
+  height: 60px;
+  width: 60px;
+  bottom: 3px;
+}
+
+.socials{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+}
+
 #loggedInInfo{
   position: relative;
   right: 30px;
@@ -167,7 +192,4 @@ a {
   border-radius: 15px;
  color: black;
  text-decoration: none;
-}
-a:hover {
-  background-color: rgb(209, 207, 207);
 }
