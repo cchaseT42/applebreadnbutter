@@ -458,7 +458,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
       where: {
         spotId: req.params.spotId
       },
-      attributes: ['spotId', 'startDate', 'endDate']
+      attributes: ['id', 'userId', 'spotId', 'startDate', 'endDate']
     })
 
     for(let i = 0; i < booking.length; i++) {

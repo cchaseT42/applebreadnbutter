@@ -137,6 +137,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
   const conflictingDate = await Booking.findAll({
     where: {
+      id: !booking.id,
       spotId: booking.spotId,
       startDate: {
       [op.between]: [startDate, endDate]
@@ -147,7 +148,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     }
   })
 
-  //console.log(conflictingDate)
+  console.log(conflictingDate)
 
   if (booking.userId !== id) {
     const err = new Error('Forbidden');

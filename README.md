@@ -39,6 +39,47 @@ You can view more about the spot here. there are edit and delete buttons if you 
 * Touch up CSS further.
 * Add widgets to the login page to allow signups through google, facebook, or twitter.
 
+# Technical Difficulties
+
+This was my first time using redux, it is quite difficult! Spent a long time working with a broken state. Eventually got some help and landed on
+this much better block of code!
+
+```Javascript
+const spotsReducer = (state = initialState, action) => {
+  switch (action.type) {
+  case LOAD: {
+    const newState = {}
+    action.payload.Spots.forEach(spot => {
+      newState[spot.id] = spot
+    });
+    return newState
+  }
+    case CREATE: {
+      const newState = {...state, [action.spot.id]: action.spot}
+      return newState
+    }
+    case GET_ONE: {
+      const newState = {[action.spot.id]: action.spot}
+      return newState
+  }
+    case RESET: {
+      return initialState
+  }
+    case DELETE: {
+      const newState = {...state}
+      delete newState[action.spotId];
+      return newState
+    }
+    case UPDATE: {
+      const newState = {...state, [action.spot.id]: action.spot}
+      return newState
+    }
+
+    default: return state;
+  }
+};
+```
+
 # Get started
 
 To run this application on your local machine, download the contents of the repo and npm install the listed dependancies in the package.json file.
@@ -50,3 +91,4 @@ the frontend is running.
 
 
 If you would like to get in contact with me, you can reach me at my email supershoo3@gmail.com
+

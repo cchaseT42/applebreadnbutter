@@ -18,6 +18,8 @@
   margin-right: 40px;
   color: red;
   list-style-type: none;
+  overflow: wrap;
+  width: 80%;
 }
 
 .demoUser {
