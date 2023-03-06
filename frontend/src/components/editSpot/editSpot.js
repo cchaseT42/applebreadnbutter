@@ -1,19 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { getOneSpot } from '../../store/spots';
 import { editSpot } from '../../store/spots';
 import './editSpot.css'
 
 const EditSpot = () => {
-const dispatch = useDispatch();
-const [address, setAddress] = useState("")
-const [city, setCity] = useState("")
-const [state, setState] = useState("")
-const [country, setCountry] = useState("")
-const [name, setName] = useState("")
-const [description, setDescription] = useState("")
-const [price, setPrice] = useState("")
-const [image, setImage] = useState("")
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOneSpot(spotId));
+  }, [dispatch])
+
+  let spot = useSelector(state => state.spots)
+  spot = (Object.values(spot)[0])
+
+
+const [address, setAddress] = useState(spot.address)
+const [city, setCity] = useState(spot.city)
+const [state, setState] = useState(spot.state)
+const [country, setCountry] = useState(spot.country)
+const [name, setName] = useState(spot.name)
+const [description, setDescription] = useState(spot.description)
+const [price, setPrice] = useState(spot.price)
+const [image, setImage] = useState(spot.SpotImages[0].url)
 const [errors, setErrors] = useState([])
 let history = useHistory()
 const { spotId } = useParams()

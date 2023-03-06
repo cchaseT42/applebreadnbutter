@@ -151,7 +151,7 @@ function SpotDetails() {
       </div>
       <div className="lower_div">
       <SpotReviews/>
-      {( sessionUser && !hasBooking) &&
+      {( (!isOwner && sessionUser) && !hasBooking) &&
       <div className="createBookingDiv">
         <ul className="errors">
         {errors.map((error, ind) => (
@@ -183,7 +183,7 @@ function SpotDetails() {
         </div>
         </div>
         }
-          {hasBooking &&
+          {(!isOwner && hasBooking) &&
           <div className="createBookingDiv">
             <div className="createdBookingDiv">
           <p id="bookedthis">You have booked this spot</p>
