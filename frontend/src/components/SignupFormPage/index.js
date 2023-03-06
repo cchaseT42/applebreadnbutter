@@ -30,12 +30,14 @@ function SignupFormPage({setShowModal}) {
     if (error.length) return setErrors(error)
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
+      dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
       .then(() => setShowModal(false))
         .catch(async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          if (data.errors) error.push(Object.values(data.errors)[0])
+          if (error.length) return setErrors(error);
         });
+      console.log(errors, "errors")
     }
   };
 
@@ -43,7 +45,7 @@ function SignupFormPage({setShowModal}) {
     <div className="body">
     <form className="form" onSubmit={handleSubmit}>
       <ul className="errors">
-        {error.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li>{error}</li>)}
       </ul>
       <span className="splashText">Welcome!</span>
         <input

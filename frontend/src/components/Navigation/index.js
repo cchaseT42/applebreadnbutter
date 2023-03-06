@@ -5,6 +5,8 @@ import ProfileButton from './ProfileButton';
 import LoginForm from '../LoginFormModal/LoginForm';
 import { Modal } from '../../context/Modal'
 import SignupFormPage from '../SignupFormPage'
+import github from '../../assets/github-mark.png'
+import linkedin from '../../assets/linkin.png'
 import './Navigation.css';
 import logo from '../../logo/Screenshot_56.png'
 
@@ -22,8 +24,20 @@ function Navigation({ isLoaded }){
     <ul className='nav'>
       <img className='logo' src={logo} onClick={redirect}>
       </img>
-      <li className='navLinks becomeHost'>
-        {sessionUser ? <NavLink exact to="/create"> Become a Host </NavLink>:<></>}
+      <div className='socials'>
+            <a href="https://github.com/cchaseT42" target="_blank">
+            <div className="github">
+            <img id="socialimg" src={github}></img>
+            </div>
+            </a>
+            <a href='https://www.linkedin.com/in/chase-towe-89673523a/' target="_blank">
+            <div className='linkedin'>
+            <img id="socialimg2" src={linkedin}></img>
+            </div>
+            </a>
+      </div>
+      <li className='navLinks'>
+        {sessionUser ? <NavLink exact to="/create" className="becomeHost"> Become a Host </NavLink>:<></>}
 
       </li>
       <li className='navLinks button'>
