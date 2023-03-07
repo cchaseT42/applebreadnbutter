@@ -137,7 +137,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
   const conflictingDate = await Booking.findAll({
     where: {
-      id: !booking.id,
       spotId: booking.spotId,
       startDate: {
       [op.between]: [startDate, endDate]
@@ -186,6 +185,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
   }
 
   if(conflictingDate.length){
+
+    if (!conflictingDate.length == 1 && !conflictingDate[0].id == booking.id){
     const err = new Error('Conflicting dates');
     err.message = "Sorry, this spot is already booked for the specified dates.",
     res.statusCode = '403'
@@ -193,6 +194,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
       message: err.message,
       statusCode: 403
     })
+  }
 
   }
 
