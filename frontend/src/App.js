@@ -10,7 +10,6 @@ import EditSpot from "./components/editSpot/editSpot";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateReview from "./components/CreateReview/CreateReview";
 import ReviewDetails from "./components/ReviewDetails/ReviewDetails"
-import UpdateBooking from "./components/UpdateBooking/UpdateBooking";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,9 +23,6 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path = "/bookings/:bookingId">
-          <UpdateBooking/>
-          </Route>
           <Route exact path = "/spots/:spotId/review/:reviewId">
             <ReviewDetails/>
           </Route>

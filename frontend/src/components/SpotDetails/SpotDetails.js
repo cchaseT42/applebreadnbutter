@@ -61,6 +61,7 @@ function SpotDetails() {
     if (ele.userId == sessionUser.id && (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate))){
       hasBooking = true
       ownedBookingId = ele.id
+
     }
   })
 }
@@ -187,8 +188,7 @@ function SpotDetails() {
             <div className="createdBookingDiv">
           <p id="bookedthis">You have booked this spot</p>
           <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
-          {/* <UpdateBookingModal bookingId={ownedBookingId}/> */}
-          <button onClick={e => history.push(`/bookings/${ownedBookingId}`)}>Edit Booking</button>
+          <UpdateBookingModal bookingId={ownedBookingId}/>
           </div>
           </div>
           }
