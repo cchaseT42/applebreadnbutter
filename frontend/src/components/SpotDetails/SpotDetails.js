@@ -187,7 +187,8 @@ function SpotDetails() {
             <div className="createdBookingDiv">
           <p id="bookedthis">You have booked this spot</p>
           <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
-          <UpdateBookingModal bookingId={ownedBookingId}/>
+          {/* <UpdateBookingModal bookingId={ownedBookingId}/> */}
+          <button onClick={e => history.push(`/bookings/${ownedBookingId}`)}>Edit Booking</button>
           </div>
           </div>
           }
