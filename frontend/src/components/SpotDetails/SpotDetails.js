@@ -42,7 +42,7 @@ function SpotDetails() {
     bookedDatesArr.push(booking)
   })
 
-  console.log(bookedDatesArr)
+
   let daysmili = endDate.getTime() - startDate.getTime()
   let days = Math.ceil(daysmili / (1000 * 3600 * 24))
 
@@ -61,7 +61,6 @@ function SpotDetails() {
     if (ele.userId == sessionUser.id && (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate))){
       hasBooking = true
       ownedBookingId = ele.id
-      console.log(ownedBookingId)
     }
   })
 }
