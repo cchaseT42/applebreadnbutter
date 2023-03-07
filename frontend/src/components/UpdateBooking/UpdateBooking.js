@@ -32,10 +32,12 @@ function UpdateBooking({setShowModal, bookingId}) {
     if (endDate < startDate) error.push("Cannot book end date before start date.")
 
     Object.values(bookings).forEach(ele => {
+      if (!booking){
       if ((startDate > new Date(ele.startDate) && startDate < new Date(ele.endDate))
         || endDate > new Date(ele.startDate) && endDate < new Date(ele.endDate)
         )
         return error.push("This spot is already booked for the selected dates.")
+      }
     })
 
     if (error.length) return setErrors(error)
