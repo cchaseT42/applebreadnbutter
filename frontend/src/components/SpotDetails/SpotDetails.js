@@ -42,7 +42,7 @@ function SpotDetails() {
     bookedDatesArr.push(booking)
   })
 
-  console.log(bookedDatesArr)
+
   let daysmili = endDate.getTime() - startDate.getTime()
   let days = Math.ceil(daysmili / (1000 * 3600 * 24))
 
@@ -61,7 +61,7 @@ function SpotDetails() {
     if (ele.userId == sessionUser.id && (currDate < new Date(ele.startDate) || currDate < new Date(ele.endDate))){
       hasBooking = true
       ownedBookingId = ele.id
-      console.log(ownedBookingId)
+
     }
   })
 }
@@ -91,7 +91,7 @@ function SpotDetails() {
   const newBooking = async (e) => {
     e.preventDefault();
 
-    if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
+    // if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
     if (endDate < startDate) error.push("Cannot book end date before start date.")
 
     Object.values(bookings).forEach(ele => {

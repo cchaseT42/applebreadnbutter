@@ -24,18 +24,6 @@ function Navigation({ isLoaded }){
     <ul className='nav'>
       <img className='logo' src={logo} onClick={redirect}>
       </img>
-      <div className='socials'>
-            <a href="https://github.com/cchaseT42" target="_blank">
-            <div className="github">
-            <img id="socialimg" src={github}></img>
-            </div>
-            </a>
-            <a href='https://www.linkedin.com/in/chase-towe-89673523a/' target="_blank">
-            <div className='linkedin'>
-            <img id="socialimg2" src={linkedin}></img>
-            </div>
-            </a>
-      </div>
       <li className='navLinks'>
         {sessionUser ? <NavLink exact to="/create" className="becomeHost"> Become a Host </NavLink>:<></>}
 

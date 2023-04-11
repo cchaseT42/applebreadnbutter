@@ -8,7 +8,6 @@ function BookedDates({bookedDatesArr}){
       <div>
       <p>Currently Booked For:</p>
     {booked.map((booking) => {
-      {console.log(booking)}
       return (
       <li>
         <p>{booking[0]} - {booking[1]}</p>
