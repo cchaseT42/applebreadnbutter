@@ -91,7 +91,6 @@ function SpotDetails() {
   const newBooking = async (e) => {
     e.preventDefault();
 
-    // if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
     if (endDate < startDate) error.push("Cannot book end date before start date.")
 
     Object.values(bookings).forEach(ele => {
@@ -132,12 +131,19 @@ function SpotDetails() {
 
   return (
     <div className="spotDetails">
-      <h2 className = "SpotName">{spot.name}
-       <i className="fa-solid fa-star"></i> {spot.avgStarRating ?
-        <span className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</span>
-        :<span className="avgRatingSpot">0</span>}</h2>
+      <h2 className = "SpotName">{spot.name}</h2>
       <div className="topinfo">
-      <h3 className ="location">{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
+        <div className="locationAndReview">
+          <div className="reviewavg">
+        <i id = "star" className="fa-solid fa-star"></i> {spot.avgStarRating ?
+        <h3 className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</h3>
+        :<h3 className="avgRatingSpot">0</h3>}
+        <p id="reviewsTop">Reviews</p>
+        </div>
+        <div className="location">
+      <h3>{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
+      </div>
+        </div>
       <div className = "OwnerButtons">
       {isOwner ? <button id = "DeleteSpotButton" onClick={deleteSpot}>Delete listing</button> : <></> }
       {isOwner ? <button id = "UpdateSpotButton" onClick={updateSpot}>Update Information</button> : <></>}

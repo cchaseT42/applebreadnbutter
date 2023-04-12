@@ -1,163 +1,36 @@
 .spotDetails {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding-left: 20%;
-  padding-right: 20%;
-  margin: auto;
-  padding-top: 50px;
-  font-family: Montserrat,sans-serif;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.locationAndReview{
+  display: flex;
+  flex-direction: row;
+}
+
+.reviewavg{
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.SpotName{
+  margin-bottom: 0px;
+}
+
+#star{
+  margin-top: 20px;
+}
+
+#reviewsTop{
+  margin-top: 22px;
+  margin-left: 5px;
+  font-weight: 600;
 }
 
 .SpotImage {
-  height: 500;
-  width: auto;
-}
-
-.SpotName {
-  font-weight: lighter;
-}
-
-.SpotPrice {
-  font-weight: lighter;
-}
-
-.ownerName {
-  font-weight: lighter;
-}
-
-.location {
-  font-weight: lighter;
-}
-
-.avgRatingSpot {
-  font-size: 22px;
-}
-
-.topinfo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.OwnerButtons {
-  padding-top: 18px;
-}
-
-#DeleteSpotButton {
-  background: linear-gradient(90deg,#df1c4d,#de056a);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12pt;
-  font-weight: 600;
-  height: 20px;
-  width: 160px;
-}
-
-#UpdateSpotButton {
-    background: linear-gradient(90deg,#df1c4d,#de056a);
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 12pt;
-    font-weight: 600;
-    height: 20px;
-    width: 160px;
-}
-
-#LeaveReviewButton {
-  background: linear-gradient(90deg,#df1c4d,#de056a);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12pt;
-  font-weight: 600;
-  height: 50px;
-  width: 170px;
-}
-
-#LeaveReviewButton:hover {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-
-
-.description {
-  font-weight: lighter;
-  border-style: solid;
-  border-color: transparent;
-  border-top-color: rgb(199,197,197);
-  border-bottom-color: rgb(199,197,197);
-}
-
-.lower_div{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.createBookingDiv{
-  border: 1px solid rgb(221, 221, 221);
-  border-radius: 12px;
-  margin-top: 10px;
-  width: 300px;
-  padding: 24px;
-  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
-}
-
-.createdBookingDiv{
-  display: flex;
-  flex-direction: column;
-}
-
-#bookedthis{
-  margin-left: 15%;
-}
-
-#calendar{
-  overflow: wrap;
-}
-
-.totals{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-style: solid;
-  border-top-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: rgb(194,192,192);
-}
-
-.reserveP{
-  margin-left: 10%;
-}
-
-.reserveButtonDiv{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-#reserveButton{
-margin-top: 10px;
-background: linear-gradient(90deg, #df1c4d, #de056a);
-border: none;
-border-radius: 7px;
-height: 40px;
-color: white;
-font-size: 12pt;
-font-weight: 600;
-}
-
-#reserveButton:hover{
-  cursor: pointer;
+  width: 100%;
+  height: 35rem;
 }
