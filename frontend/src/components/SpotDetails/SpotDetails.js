@@ -153,7 +153,9 @@ function SpotDetails() {
       <img className= "SpotImage" src={spot.SpotImages[0].url} alt='image'/>
       <div className="lowerHalf">
       <div className="moreInfo">
-      <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
+        <div className="hostedby">
+        <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
+        </div>
       {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
       <div className="fluff1">
         <img className="basketCover" src={basketCover}/>
@@ -168,12 +170,10 @@ function SpotDetails() {
       <div className = "fluff2">
 
       </div>
-      <div className="lower_div">
-      <SpotReviews/>
-      </div>
       </div>
       {( (!isOwner && sessionUser) && !hasBooking) &&
       <div className="createBookingDiv">
+        <div className="bookingContent">
         <ul className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -203,6 +203,7 @@ function SpotDetails() {
         <p>${spot.price * days}</p>
         </div>
         </div>
+        </div>
         }
           {(!isOwner && hasBooking) &&
           <div className="createBookingDiv">
@@ -213,6 +214,9 @@ function SpotDetails() {
           </div>
           </div>
           }
+      </div>
+      <div className="lower_div">
+      <SpotReviews/>
       </div>
     </div>
   )
