@@ -5,6 +5,17 @@
   margin-right: 20%;
 }
 
+.lowerHalf{
+  display: flex;
+  flex-direction: row;
+}
+
+.moreInfo{
+  border-style: solid;
+  border-color: black;
+  width: 60%;
+}
+
 .locationAndReview{
   display: flex;
   flex-direction: row;
@@ -14,6 +25,29 @@
   margin-right: 2rem;
   display: flex;
   flex-direction: row;
+}
+
+.fluff1{
+  border-bottom-style: solid;
+  border-color: #DDDDDD;
+  border-width: 1px;
+}
+.basketCover{
+  height: 29px;
+  width: 186px;
+}
+
+.description{
+  height: 260px;
+  border-bottom-style: solid;
+  border-color: #DDDDDD;
+  border-width: 1px;
+}
+
+.descContent{
+height: 70%;
+padding-top: 32px;
+padding-bottom: 32px;
 }
 
 .SpotName{

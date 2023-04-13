@@ -11,6 +11,7 @@ import BookingsModal from '../BookingsModal/BookingsModal';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
 import UpdateBookingModal from '../UpdateBookingModal';
+import basketCover from '../../assets/basket.png'
 
 
 export let isOwner
@@ -150,13 +151,27 @@ function SpotDetails() {
       </div>
       </div>
       <img className= "SpotImage" src={spot.SpotImages[0].url} alt='image'/>
-      <h3 className = "ownerName">Hosted by {spot.Owner.firstName}</h3>
-      <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3>
+      <div className="lowerHalf">
+      <div className="moreInfo">
+      <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
+      {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
+      <div className="fluff1">
+        <img className="basketCover" src={basketCover}/>
+        <p>Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
+           listing inaccuracies, and bad apples.</p>
+      </div>
       <div className = "description">
+        <div className="descContent">
       <p>{spot.description}</p>
+        </div>
+      </div>
+      <div className = "fluff2">
+
       </div>
       <div className="lower_div">
       <SpotReviews/>
+      </div>
+      </div>
       {( (!isOwner && sessionUser) && !hasBooking) &&
       <div className="createBookingDiv">
         <ul className="errors">
