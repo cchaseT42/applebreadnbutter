@@ -12,8 +12,6 @@
 }
 
 .moreInfo{
-  border-style: solid;
-  border-color: black;
   width: 60%;
   margin-right: 7%;
 }
@@ -36,6 +34,8 @@
 }
 
 .fluff1{
+  padding-top: 5%;
+  padding-bottom: 5%;
   border-bottom-style: solid;
   border-color: #DDDDDD;
   border-width: 1px;
@@ -78,11 +78,26 @@ padding-bottom: 32px;
 }
 
 .createBookingDiv{
-border-style: solid;
-border-color: black;
+border-radius: 15px;
+box-shadow: 0px 3px 3px 5px #ebebeb;
+border-color: rgb(156, 153, 153);
 width: 372px;
 }
 
 .bookingContent{
   padding: 20px;
+}
+
+.reserveButtonDiv{
+  padding: 10%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.totals{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
