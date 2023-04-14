@@ -12,6 +12,7 @@ import './SpotDetails.css'
 import "react-widgets/styles.css";
 import UpdateBookingModal from '../UpdateBookingModal';
 import basketCover from '../../assets/basket.png'
+import { pt } from 'date-fns/locale';
 
 
 export let isOwner
@@ -174,6 +175,9 @@ function SpotDetails() {
       {( (!isOwner && sessionUser) && !hasBooking) &&
       <div className="createBookingDiv">
         <div className="bookingContent">
+          <div className="totals">
+            <p>${spot.price} night</p>
+          </div>
         <ul className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -195,13 +199,29 @@ function SpotDetails() {
         />
         <div className="reserveButtonDiv">
           <BookingsModal bookedDatesArr={bookedDatesArr}/>
+          <div className="reserveDiv">
           <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
+          </div>
         </div>
-        <div className="totals">
-        <p>${spot.price} X {days} nights</p>
-        <p>${spot.price * days}</p>
+        <div className="fees">
+          <div className="totals">
+            <p>${spot.price} X {days} nights</p>
+            <p>${spot.price * days}</p>
+          </div>
+          <div className="totals">
+            <p>Cleaning fee</p>
+            <p>$100</p>
+          </div>
+          <div className="totals">
+            <p>Service fee</p>
+            <p>$100</p>
+          </div>
         </div>
+        <div className="total">
+            <p>Total</p>
+            <p>${spot.price * days + 200}</p>
+          </div>
         </div>
         </div>
         }
