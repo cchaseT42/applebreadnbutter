@@ -61,7 +61,7 @@ function SpotReviews(){
           <div key={review.id} className="reviewBody">
             <span className="userReview">{review.User.firstName}, {review.User.lastName} <i class="fa-solid fa-star reviewStar"></i>{review.stars}</span>
             <span className='reviewReview'>{review.review}</span>
-            {isOwner ? <button id="DeleteReviewButton" onClick={deleteReview}>Delete Review</button> : <></>}
+            {isOwner ? <button id="DeleteReviewButton" onClick={deleteReview}>Delete</button> : <></>}
           </div>
           )
         })}

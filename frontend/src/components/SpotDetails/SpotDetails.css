@@ -40,9 +40,14 @@
   border-color: #DDDDDD;
   border-width: 1px;
 }
+
 .basketCover{
   height: 29px;
   width: 186px;
+}
+
+#flavorText{
+  padding-top: 1rem;
 }
 
 .description{

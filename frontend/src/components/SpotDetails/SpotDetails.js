@@ -160,7 +160,7 @@ function SpotDetails() {
       {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
       <div className="fluff1">
         <img className="basketCover" src={basketCover}/>
-        <p>Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
+        <p id="flavorText">Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
            listing inaccuracies, and bad apples.</p>
       </div>
       <div className = "description">
