@@ -11,6 +11,8 @@ import BookingsModal from '../BookingsModal/BookingsModal';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
 import UpdateBookingModal from '../UpdateBookingModal';
+import basketCover from '../../assets/basket.png'
+import { pt } from 'date-fns/locale';
 
 
 export let isOwner
@@ -91,7 +93,6 @@ function SpotDetails() {
   const newBooking = async (e) => {
     e.preventDefault();
 
-    // if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
     if (endDate < startDate) error.push("Cannot book end date before start date.")
 
     Object.values(bookings).forEach(ele => {
@@ -132,27 +133,65 @@ function SpotDetails() {
 
   return (
     <div className="spotDetails">
-      <h2 className = "SpotName">{spot.name}
-       <i className="fa-solid fa-star"></i> {spot.avgStarRating ?
-        <span className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</span>
-        :<span className="avgRatingSpot">0</span>}</h2>
+      <h2 className = "SpotName">{spot.name}</h2>
       <div className="topinfo">
-      <h3 className ="location">{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
+        <div className="locationAndReview">
+          <div className="reviewavg">
+        <i id = "star" className="fa-solid fa-star"></i> {spot.avgStarRating ?
+        <h3 className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</h3>
+        :<h3 className="avgRatingSpot">0</h3>}
+        <p id="reviewsTop">Reviews</p>
+        </div>
+        <div className="location">
+      <h3>{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
+      </div>
+        </div>
       <div className = "OwnerButtons">
       {isOwner ? <button id = "DeleteSpotButton" onClick={deleteSpot}>Delete listing</button> : <></> }
       {isOwner ? <button id = "UpdateSpotButton" onClick={updateSpot}>Update Information</button> : <></>}
       </div>
       </div>
       <img className= "SpotImage" src={spot.SpotImages[0].url} alt='image'/>
-      <h3 className = "ownerName">Hosted by {spot.Owner.firstName}</h3>
-      <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3>
-      <div className = "description">
-      <p>{spot.description}</p>
+      <div className="lowerHalf">
+      <div className="moreInfo">
+        <div className="hostedby">
+        <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
+        </div>
+      {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
+      <div className='fluff'>
+        <div className="fluffDiv">
+        <h3>Self check-in</h3>
+        <p>Check yourself in with the keypad.</p>
+        </div>
+        <div className="fluffDiv">
+        <h3>{spot.Owner.firstName} is a Superhost</h3>
+        <p>Superhosts are experienced, highly rated hosts who are
+          committed to providing great stays for guests.</p>
+        </div>
+        <div className="fluffDiv">
+        <h3>Free cancellations</h3>
+        </div>
       </div>
-      <div className="lower_div">
-      <SpotReviews/>
+      <div className="fluff1">
+        <img className="basketCover" src={basketCover}/>
+        <p id="flavorText">Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
+           listing inaccuracies, and bad apples.</p>
+      </div>
+      <div className = "description">
+        <div className="descContent">
+      <p>{spot.description}</p>
+        </div>
+      </div>
+      <div className = "fluff2">
+
+      </div>
+      </div>
       {( (!isOwner && sessionUser) && !hasBooking) &&
       <div className="createBookingDiv">
+        <div className="bookingContent">
+          <div className="totals">
+            <p>${spot.price} night</p>
+          </div>
         <ul className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -174,12 +213,29 @@ function SpotDetails() {
         />
         <div className="reserveButtonDiv">
           <BookingsModal bookedDatesArr={bookedDatesArr}/>
+          <div className="reserveDiv">
           <button id="reserveButton" onClick={newBooking}>Reserve</button>
           <p className="reserveP">You won't be charged yet</p>
+          </div>
         </div>
-        <div className="totals">
-        <p>${spot.price} X {days} nights</p>
-        <p>${spot.price * days}</p>
+        <div className="fees">
+          <div className="totals">
+            <p>${spot.price} X {days} nights</p>
+            <p>${spot.price * days}</p>
+          </div>
+          <div className="totals">
+            <p>Cleaning fee</p>
+            <p>$100</p>
+          </div>
+          <div className="totals">
+            <p>Service fee</p>
+            <p>$100</p>
+          </div>
+        </div>
+        <div className="total">
+            <p>Total</p>
+            <p>${spot.price * days + 200}</p>
+          </div>
         </div>
         </div>
         }
@@ -187,11 +243,14 @@ function SpotDetails() {
           <div className="createBookingDiv">
             <div className="createdBookingDiv">
           <p id="bookedthis">You have booked this spot</p>
-          <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
+          <button id="cancelButton" onClick={destroyBooking}>Cancel Booking</button>
           <UpdateBookingModal bookingId={ownedBookingId}/>
           </div>
           </div>
           }
+      </div>
+      <div className="lower_div">
+      <SpotReviews/>
       </div>
     </div>
   )
