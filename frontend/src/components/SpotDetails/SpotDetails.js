@@ -15,10 +15,12 @@ import basketCover from '../../assets/basket.png'
 import { pt } from 'date-fns/locale';
 
 
+
 export let isOwner
 function SpotDetails() {
 
   let isOwner
+  let tooLong = false
   const sessionUser = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings)
   const bookingsArr = Object.values(bookings)
@@ -26,6 +28,7 @@ function SpotDetails() {
   const tomorrow = new Date()
   tomorrow.setDate(new Date().getDate() + 1)
   const [startDate, setStartDate] = useState(tomorrow)
+  const [showMoreDesc, setshowMoreDesc] = useState(false)
   const week = new Date()
   week.setDate(new Date().getDate() + 7)
   const [endDate, setEndDate] = useState(week)
@@ -128,6 +131,10 @@ function SpotDetails() {
   )
   const isLoggedIn = sessionUser
 
+  if (spot.description && spot.description.length > 1024){
+    tooLong = true
+  }
+
 
 
 
@@ -177,9 +184,14 @@ function SpotDetails() {
         <p id="flavorText">Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
            listing inaccuracies, and bad apples.</p>
       </div>
-      <div className = "description">
+      <div className = {showMoreDesc ? "descriptionMore" : "descriptionLess"}>
         <div className="descContent">
-      <p>{spot.description}</p>
+      <p id={showMoreDesc ? "descriptionMore" : "descriptionLess"}>{spot.description}</p>
+      <div>
+      {tooLong ? <div>{showMoreDesc ? <p className="showButtonLess" onClick={e => setshowMoreDesc(false)}>Show Less</p> :
+        <p className="showButtonMore" onClick={e => setshowMoreDesc(true)}>Show More</p>}</div>: <div></div>
+      }
+      </div>
         </div>
       </div>
       <div className = "fluff2">
