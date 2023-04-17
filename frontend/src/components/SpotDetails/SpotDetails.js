@@ -158,6 +158,20 @@ function SpotDetails() {
         <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
         </div>
       {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
+      <div className='fluff'>
+        <div className="fluffDiv">
+        <h3>Self check-in</h3>
+        <p>Check yourself in with the keypad.</p>
+        </div>
+        <div className="fluffDiv">
+        <h3>{spot.Owner.firstName} is a Superhost</h3>
+        <p>Superhosts are experienced, highly rated hosts who are
+          committed to providing great stays for guests.</p>
+        </div>
+        <div className="fluffDiv">
+        <h3>Free cancellations</h3>
+        </div>
+      </div>
       <div className="fluff1">
         <img className="basketCover" src={basketCover}/>
         <p id="flavorText">Every booking includes free &#40;imaginary&#41; protection from Host cancellations,
