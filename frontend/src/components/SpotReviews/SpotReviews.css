@@ -27,6 +27,19 @@ p, h1, h2, h3, span{
   border-style: none;
 }
 
-  #DeleteReviewButton:hover{
-    cursor: pointer;
-  }
+#DeleteReviewButton:hover{
+  cursor: pointer;
+}
+
+#LeaveReviewButton{
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 40px;
+  width: 140px;
+  margin-top: 1rem;
+}
