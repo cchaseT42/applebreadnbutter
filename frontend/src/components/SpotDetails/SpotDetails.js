@@ -243,7 +243,7 @@ function SpotDetails() {
           <div className="createBookingDiv">
             <div className="createdBookingDiv">
           <p id="bookedthis">You have booked this spot</p>
-          <button id="reserveButton" onClick={destroyBooking}>Cancel Booking</button>
+          <button id="cancelButton" onClick={destroyBooking}>Cancel Booking</button>
           <UpdateBookingModal bookingId={ownedBookingId}/>
           </div>
           </div>

@@ -107,17 +107,41 @@ width: 380px;
 height: fit-content;
 }
 
+.createdBookingDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+#cancelButton{
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 40px;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .bookingContent{
   padding: 20px;
 }
 
 .reserveButtonDiv{
-  padding: 10%;
-  height: 100px;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  padding-top: 1rem;
+  padding-left: 0px;
+  padding-bottom: 2rem;
+  padding-right: 0px;
+  margin: 0px;
   justify-content: space-between;
+  height: 130px;
 }
 .totals{
   display: flex;
@@ -137,18 +161,6 @@ height: fit-content;
   border-bottom-style: solid;
   border-color: #DDDDDD;
   border-width: 1px;
-}
-
-.reserveButtonDiv{
-  display: flex;
-  flex-direction: column;
-  padding-top: 1rem;
-  padding-left: 0px;
-  padding-bottom: 2rem;
-  padding-right: 0px;
-  margin: 0px;
-  justify-content: space-between;
-  height: 130px;
 }
 
 .reserveDiv{
