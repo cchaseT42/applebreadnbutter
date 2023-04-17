@@ -1,47 +1,32 @@
-.reviews {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  max-width: 800px;
-  margin: auto;
-  padding-top: 50px;
-  font-family: Montserrat,sans-serif;
+p, h1, h2, h3, span{
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.reviews {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 200px;
+  width: 90%;
+  }
 
 .reviewBody{
+  width: 400px;
+  height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  max-width: 300px;
-  max-height: 100px;
-  margin: auto;
-  border-style: solid;
-  border-color: transparent;
-  padding-bottom: 18px;
-  overflow-y: hidden;
 }
 
-.userReview {
-  font-size: 22px;
+#DeleteReviewButton{
+ width: 80px;
+  height: 26px;
+  border-radius: 20px;
+  color:rgb(255, 255, 255);
+  background-color: black;
+  border-style: none;
 }
 
-.buttons{
-  margin-top: 10px;
-}
-
-.reviewStar {
-  font-size: 18px;
-}
-
-#DeleteReviewButton {
-  background: linear-gradient(90deg,#df1c4d,#de056a);
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12pt;
-  font-weight: 600;
-  height: 50px;
-  width: 200px;
-}
+  #DeleteReviewButton:hover{
+    cursor: pointer;
+  }
