@@ -103,6 +103,7 @@ p, h1, h2, h3{
   padding-top: 2rem;
   cursor: pointer;
   width: fit-content;
+  text-decoration: underline;
 }
 
 .SpotName{
