@@ -18,6 +18,21 @@ p, h1, h2, h3, span{
   flex-direction: column;
 }
 
+.reviewReview{
+  overflow: hidden;
+  height: 200px;
+}
+
+.reviewModal{
+  width: 60rem;
+  height: fit-content;
+  padding: 2rem;
+}
+
+.userInfo{
+  padding-bottom: 1rem;
+}
+
 #DeleteReviewButton{
  width: 80px;
   height: 26px;
@@ -42,4 +57,11 @@ p, h1, h2, h3, span{
   height: 40px;
   width: 140px;
   margin-top: 1rem;
+}
+
+#reviewLonger{
+  padding-top: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+  width: fit-content;
 }
