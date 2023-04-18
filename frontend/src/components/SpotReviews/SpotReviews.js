@@ -2,8 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from 'react-router-dom'
 import './SpotReviews.css'
+import SpotReviewsModal from './index'
 import { destroyReview, getReviews } from "../../store/reviews";
+
+
 function SpotReviews(){
+
   let isOwner
   let hasReview = false
   let reviewId
@@ -14,6 +18,8 @@ function SpotReviews(){
   const reviews = useSelector(state => state.reviews)
   const { spotId } = useParams()
   const spot = useSelector(state => state.spots[spotId])
+  const [showMoreRev, setshowMoreRev] = useState(false)
+  let tooLong = 500
 
   if (sessionUser)(
     isOwner = sessionUser.id === spot.ownerId
@@ -60,7 +66,10 @@ function SpotReviews(){
           return (
           <div key={review.id} className="reviewBody">
             <span className="userReview">{review.User.firstName}, {review.User.lastName} <i class="fa-solid fa-star reviewStar"></i>{review.stars}</span>
-            <span className='reviewReview'>{review.review}</span>
+            <div>
+            {review.review.length > tooLong ? <p className='reviewReview'>{review.review}...</p> : <p className='reviewReview'>{review.review}</p>}
+            {review.review.length > tooLong ? <SpotReviewsModal reviewId={review.id}/> : <></>}
+            </div>
             {isOwner ? <button id="DeleteReviewButton" onClick={deleteReview}>Delete</button> : <></>}
           </div>
           )

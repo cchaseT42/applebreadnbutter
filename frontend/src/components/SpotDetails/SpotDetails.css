@@ -13,6 +13,7 @@ p, h1, h2, h3{
   display: flex;
   flex-direction: row;
   margin-top: 4%;
+  height: fit-content;
 }
 
 .moreInfo{
@@ -67,17 +68,42 @@ p, h1, h2, h3{
   padding-top: 1rem;
 }
 
-.description{
+.descriptionLess{
   height: 260px;
   border-bottom-style: solid;
   border-color: #DDDDDD;
   border-width: 1px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
-.descContent{
-height: 70%;
-padding-top: 32px;
-padding-bottom: 32px;
+#descriptionLess{
+  height: 80%;
+  overflow: hidden;
+}
+
+.descriptionMore{
+  height: fit-content;
+  border-bottom-style: solid;
+  border-color: #DDDDDD;
+  border-width: 1px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.showButtonLess{
+  padding-top: 2rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.showButtonMore{
+  padding-top: 2rem;
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: underline;
 }
 
 .SpotName{
@@ -124,6 +150,42 @@ height: fit-content;
   font-weight: 600;
   height: 40px;
   width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.OwnerButtons{
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between;
+  width: 40%; */
+}
+
+#DeleteSpotButton{
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 40px;
+  width: 200px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+#UpdateSpotButton{
+  background: linear-gradient(90deg,#df1c4d,#de056a);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 600;
+  height: 40px;
+  width: 200px;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
