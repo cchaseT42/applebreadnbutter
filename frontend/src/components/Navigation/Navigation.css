@@ -73,7 +73,7 @@
 
 .button {
   position: relative;
-  bottom: 40px;
+  bottom: 30px;
 }
 
 .credentials {
@@ -89,7 +89,8 @@
 .becomeHost {
   position: relative;
   margin-right: 400px;
-  bottom: 30px;
+  bottom: 20px;
+  padding: 5px;
 }
 
 .becomeHost:hover{
@@ -112,6 +113,7 @@
 #button:hover {
 box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
 transition-duration: 0.2s;
+cursor: pointer;
 }
 
 #signup_button {

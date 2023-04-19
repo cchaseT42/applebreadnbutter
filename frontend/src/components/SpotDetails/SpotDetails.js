@@ -83,11 +83,6 @@ function SpotDetails() {
     await history.push('/')
   }
 
-  const reroute = async (e) => {
-    e.preventDefault();
-    await history.push(`/spots/${spotId}/create`)
-  }
-
   const updateSpot = async (e) => {
     e.preventDefault();
     await history.push(`/edit/${spotId}`)
@@ -129,14 +124,10 @@ function SpotDetails() {
   if (sessionUser)(
   isOwner = sessionUser.id === spot.ownerId
   )
-  const isLoggedIn = sessionUser
 
   if (spot.description && spot.description.length > 1024){
     tooLong = true
   }
-
-
-
 
   return (
     <div className="spotDetails">
@@ -147,7 +138,6 @@ function SpotDetails() {
         <i id = "star" className="fa-solid fa-star"></i> {spot.avgStarRating ?
         <h3 className="avgRatingSpot">{Number(spot.avgStarRating).toFixed(1)}</h3>
         :<h3 className="avgRatingSpot">0</h3>}
-        <p id="reviewsTop">Reviews</p>
         </div>
         <div className="location">
       <h3>{spot.address}, {spot.city}, {spot.state}, {spot.country}</h3>
@@ -164,7 +154,6 @@ function SpotDetails() {
         <div className="hostedby">
         <h3 className = "ownerName">Home Hosted by {spot.Owner.firstName}</h3>
         </div>
-      {/* <h3 className = "SpotPrice">${spot.price} <span id="night">night</span></h3> */}
       <div className='fluff'>
         <div className="fluffDiv">
         <h3>Self check-in</h3>
