@@ -10,7 +10,7 @@ import EditSpot from "./components/editSpot/editSpot";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateReview from "./components/CreateReview/CreateReview";
 import ReviewDetails from "./components/ReviewDetails/ReviewDetails"
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
