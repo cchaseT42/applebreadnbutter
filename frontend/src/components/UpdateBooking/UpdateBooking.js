@@ -28,7 +28,6 @@ function UpdateBooking({setShowModal, bookingId}) {
   const editBookingFunc = async (e) => {
     e.preventDefault();
 
-    // if (startDate < tomorrow) error.push("Cannot book before tomorrow.")
     if (endDate < startDate) error.push("Cannot book end date before start date.")
 
     Object.values(bookings).forEach(ele => {

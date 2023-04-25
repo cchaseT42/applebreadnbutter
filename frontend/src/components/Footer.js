@@ -1,11 +1,12 @@
 import github  from '../assets/github-mark.png'
 import linkedin from '../assets/linkin.png'
+import '../index.css'
 
 
 function Footer() {
   return (
       <div className="footer">
-          <div className='socials'>
+          {/* <div className='socials'>
             <a href="https://github.com/cchaseT42" target="_blank">
             <div className="github">
             <img id="socialimg" src={github}></img>
@@ -16,7 +17,7 @@ function Footer() {
             <img id="socialimg2" src={linkedin}></img>
             </div>
             </a>
-          </div>
+          </div> */}
       </div>
   )
 }

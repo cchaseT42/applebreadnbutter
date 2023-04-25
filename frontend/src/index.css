@@ -3,26 +3,34 @@ margin:0;
 padding:0;
 }
 
-.footer {
-  background-color: #000000;
-  background-image: linear-gradient(360deg, #000000 0%, #04619f 74%);
-  color: white;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  bottom: 0;
-  justify-content: center;
-  width: 100%;
+#footer {
   margin-top: 5rem;
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  background-color: rgb(177, 177, 177);
 }
 
-.footer-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 80vw;
-  margin: auto;
-  justify-items: center;
-  padding: 5px;
-  text-align: center;
+#aboutme {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  padding: 1rem;
+}
+
+#github{
+  padding-left: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#linkedin{
+  text-decoration: underline;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+
+#me{
+  padding-top: 1rem;
 }
