@@ -18,7 +18,6 @@ function SpotReviews(){
   const reviews = useSelector(state => state.reviews)
   const { spotId } = useParams()
   const spot = useSelector(state => state.spots[spotId])
-  const [showMoreRev, setshowMoreRev] = useState(false)
   let tooLong = 500
 
   if (sessionUser)(

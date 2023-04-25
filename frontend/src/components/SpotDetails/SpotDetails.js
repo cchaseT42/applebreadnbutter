@@ -3,16 +3,14 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { destroySpot, getOneSpot } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
-import { hasReview } from '../SpotReviews/SpotReviews'
 import { getSpotBookings, createBooking, deleteBooking } from '../../store/bookings';
 import { DatePicker } from 'react-widgets';
-import { format, getDay } from "date-fns";
+import { format } from "date-fns";
 import BookingsModal from '../BookingsModal/BookingsModal';
 import './SpotDetails.css'
 import "react-widgets/styles.css";
 import UpdateBookingModal from '../UpdateBookingModal';
 import basketCover from '../../assets/basket.png'
-import { pt } from 'date-fns/locale';
 
 
 
