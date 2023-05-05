@@ -11,6 +11,7 @@ import SpotDetails from "./components/SpotDetails/SpotDetails";
 import CreateReview from "./components/CreateReview/CreateReview";
 import ReviewDetails from "./components/ReviewDetails/ReviewDetails"
 // import Footer from './components/Footer';
+import ReactGA from 'react-ga';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+  const TRACKING_ID = "G-EG284G0EDQ"; // YOUR_OWN_TRACKING_ID
+  ReactGA.initialize(TRACKING_ID);
 
   return (
     <>
